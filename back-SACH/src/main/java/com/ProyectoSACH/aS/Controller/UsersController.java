@@ -38,8 +38,11 @@ public class UsersController {
     public Users saveUsuario(@RequestBody Users user){
         return usersService.saveUser(user);
 }
+    
+    
     @PutMapping("/{id}")
     public Users updateUser(@PathVariable Integer id,@RequestBody Users user){
+        
         return usersService.updateUser(id, user);
     }
     
