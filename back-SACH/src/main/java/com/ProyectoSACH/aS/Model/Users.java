@@ -31,12 +31,12 @@ public class Users {
      private String password;
    
     @Enumerated(EnumType.STRING)
-    private tipoUsuario typeUser;
+    private types.typeUser typeUser;
 
     public Users() {
     }
 
-    public Users(String id_users, String name, String apellido, String password, tipoUsuario typeUser) {
+    public Users(String id_users, String name, String apellido, String password, types.typeUser typeUser) {
         this.id_users = id_users;
         this.name = name;
         this.apellido = apellido;
@@ -78,15 +78,12 @@ public class Users {
         this.password = password;
     }
 
-    public tipoUsuario getTypeUser() {
+    public types.typeUser getTypeUser() {
         return typeUser;
     }
 
-    public void setTypeUser(tipoUsuario typeUser) {
+    public void setTypeUser(types.typeUser typeUser) {
         this.typeUser = typeUser;
     }
     
-    
-    
 }
-

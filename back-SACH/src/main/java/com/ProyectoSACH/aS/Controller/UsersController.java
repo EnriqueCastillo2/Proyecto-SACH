@@ -6,6 +6,7 @@ import com.ProyectoSACH.aS.Service.UsersService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -54,18 +55,50 @@ public class UsersController {
     @PostMapping
     public Users saveUsuario(@RequestBody Users user){
         return usersService.saveUser(user);
-}
+    }
     
     
     @PutMapping("/{id}")
-    public Users updateUser(@PathVariable String id,@RequestBody Users user){
+    public ResponseEntity<Object> updateUser(@PathVariable String id,@RequestBody Users user){
+        
+        Optional<Users>existeingUser=usersService.getUsersById(id);
+        if(!existeingUser.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse("Usuario no encontrado", HttpStatus.NOT_FOUND.value(), null));
+        }
         user.setId_users(id);
-        return usersService.updateUser(id, user);
+        try {
+            Users updateUser=usersService.updateUser(id, user);
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse("Error en la solicitud de actualizacion: "
+                            +e.getMessage(),HttpStatus.BAD_REQUEST.value(),null));
+        }
     }
     
+    
+    
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String id){
-        usersService.deleteUser(id);
-     return ResponseEntity.noContent().build();
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable String id){
+        Optional<Users> existingUser=usersService.getUsersById(id);
+        if(!existingUser.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse("Usuario no Econtrado", HttpStatus.NOT_FOUND.value(), null));
+        }
+        try {
+            usersService.deleteUser(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                    .body(new ApiResponse("Usuario eliminado con exito", HttpStatus.NO_CONTENT.value(), null));
+              } 
+        catch (DataAccessException e) { // Ejemplo de excepción específica
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ApiResponse("Error al eliminar usuario: " + e.getMessage(), 
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse("Error al eliminar cliente"+e.getMessage(), 
+                            HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
     }
 }

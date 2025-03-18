@@ -1,7 +1,8 @@
 package com.ProyectoSACH.aS.Service;
 
 import com.ProyectoSACH.aS.Model.Users;
-import com.ProyectoSACH.aS.Model.tipoUsuario;
+import com.ProyectoSACH.aS.Model.types;
+
 import com.ProyectoSACH.aS.Repository.UsersRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -39,7 +40,7 @@ public class UsersService {
         user.setName(user.getName());
         user.setApellido(user.getApellido());
         user.setPassword(user.getPassword());
-        user.setTypeUser(tipoUsuario.user);
+        user.setTypeUser(types.typeUser.user);
         
         return usersRepository.save(user);
     }
