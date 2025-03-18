@@ -3,33 +3,24 @@ package com.ProyectoSACH.aS.Model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 
 @Entity
 @Table(name = "Users") // Personaliza el nombre de la tabla
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 public class Users {
     @Id
 //    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id_users;
+    private String id_users;
     
     private String name;
     
     private String apellido;
-    
-    
     //pendiente: manejar la excepcion en caso de que la contraseña no sea correcta
     //buscar en chat el manejo de esta excepcion; ejecutar el comando para la validacion en la base de datos
     // La expresión regular ^(?=.*[A-Z])(?=.*[\\W_]).*$ asegura que:
@@ -41,6 +32,59 @@ public class Users {
    
     @Enumerated(EnumType.STRING)
     private tipoUsuario typeUser;
+
+    public Users() {
+    }
+
+    public Users(String id_users, String name, String apellido, String password, tipoUsuario typeUser) {
+        this.id_users = id_users;
+        this.name = name;
+        this.apellido = apellido;
+        this.password = password;
+        this.typeUser = typeUser;
+    }
+    
+    
+
+    public String getId_users() {
+        return id_users;
+    }
+
+    public void setId_users(String id_users) {
+        this.id_users = id_users;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public tipoUsuario getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(tipoUsuario typeUser) {
+        this.typeUser = typeUser;
+    }
     
     
     
