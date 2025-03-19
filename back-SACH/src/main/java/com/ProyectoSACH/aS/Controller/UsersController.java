@@ -53,8 +53,11 @@ public class UsersController {
     }
     
     @PostMapping
-    public Users saveUsuario(@RequestBody Users user){
-        return usersService.saveUser(user);
+    public ResponseEntity<Object> saveUsuario(@RequestBody Users user){
+
+        Users savedUser= usersService.saveUser(user);
+       return ResponseEntity.status(HttpStatus.CREATED)
+               .body(savedUser);
     }
     
     
@@ -95,6 +98,7 @@ public class UsersController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ApiResponse("Error al eliminar usuario: " + e.getMessage(), 
                         HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse("Error al eliminar cliente"+e.getMessage(), 

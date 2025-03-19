@@ -16,7 +16,6 @@ public class Rooms {
     @Enumerated(EnumType.STRING)
     private types.typesRooms habitacion;
     
-    
     @Enumerated(EnumType.STRING)
     private types.typesRooms_level nivel;
     
