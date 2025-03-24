@@ -1,4 +1,3 @@
-
 package com.ProyectoSACH.aS.Repository;
 
 public class ApiResponse {
@@ -37,7 +36,5 @@ public class ApiResponse {
         this.data = data;
     }
 
-    
 
-    
 }
