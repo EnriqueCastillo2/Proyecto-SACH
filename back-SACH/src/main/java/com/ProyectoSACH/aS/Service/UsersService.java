@@ -50,6 +50,11 @@ public class UsersService {
         usersRepository.deleteById(id);
     }
     
+    public boolean existeUsuario(String id){
+        return usersRepository.existsById(id);
+    }
+    
+    
     //metodo para crear Id
     private String generateUniqueId(String nombre, String apellido) {
         // Obtener las primeras letras de nombre y apellido
