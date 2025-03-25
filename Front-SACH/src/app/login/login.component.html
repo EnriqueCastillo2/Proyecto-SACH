@@ -1,0 +1,53 @@
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="info">
+            <p class="txt-1"> ¡BIENVENIDO!</p>
+
+            <h2>SACH</h2>
+            <hr>
+
+            <p class="txt-2">
+                SISTEMA DE ADMINISTRACIÓN Y CONTROL DE HABITACIONES
+            </p>
+            <img src="assets/images/Logo.jpg" alt="Bienestar para tu comodidad">
+        </div>
+
+        <form class="form">
+            <h2>INICIAR SESIÓN</h2>
+
+            <p>
+                "Hagas lo que hagas, hazlo bien, tan bien que, cuando la gente te vea quiera traer a otros para
+                mostrarles."
+            </p>
+            <div class="inputs">
+                <input type="text" class="box" placeholder="Ingrese Usuario">
+                <div class="password-container">
+                    <input type="password" class="box" id="password" placeholder="Ingrese Contraseña">
+                    <i class="fa fa-eye-slash eye-icon" id="togglePassword"></i>
+                </div>       
+                <input type="submit" value="Ingresar" class="submit">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            console.log('Botón presionado');  
+            let passwordField = document.getElementById("password");
+            
+            if (passwordField) {
+                console.log('Campo de contraseña encontrado');
+            } else {
+                console.log('Campo de contraseña no encontrado');
+            }
+
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
+            
+            this.classList.toggle("fa-eye-slash");
+            this.classList.toggle("fa-eye");
+        });
+    </script>
+</body>

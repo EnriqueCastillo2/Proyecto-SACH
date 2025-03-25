@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: white;
+}
+
+.container { 
+    display: flex;
+    height: 650px;
+    width: auto;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    margin: auto;
+    margin-top: auto;
+}
+
+.info {
+    background-image: url('/assets/images/Blanca.jpg');;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding: 150px 50px;
+    width: 50%;
+}
+
+.txt-1{
+    color: #06022c;
+    text-transform: capitalize;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.info h2 {
+    color: #06022c;
+    text-transform: uppercase;
+    font-size: 70px;
+    margin-bottom: 25px;
+}
+
+.info hr {
+    width: 55px;
+    border: 4px solid #fff;
+    margin-left: 170px;
+    margin-bottom: 25px;
+}
+
+.txt-2 {
+    color: #484a66;
+    font-size: 18px;
+}
+
+.form {
+    padding: 150px 100px;
+    width: 50%;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.form h2 {
+    color: #ca6e05;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.form p {
+    font-size: 16px;
+    color: #484a66;
+    margin-bottom: 25px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    outline: none;
+    border: #dd6d04;
+    border-width: 0px 0px 0px 5px;
+    border-style: solid;
+    padding: 15px 35px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.inputs a  {
+    color: #097ef6;
+    text-decoration: none;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+.submit {
+    background-color: #997604;
+    padding: 15px;
+    border: 0;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: 25px;
+}
+
+.info-img {
+    background-image: url('/assets/images/Logo.jpg');
+    display: block; 
+    margin: 35px auto;
+    max-width: 100%;
+    height: auto; 
+    top: 10px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-container .box {
+    width: 100%; 
+    padding-right: 40px; 
+}
+
+.eye-icon {
+    font-size: 18px;
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #333; 
+}
