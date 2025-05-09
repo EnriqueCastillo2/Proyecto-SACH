@@ -4,24 +4,23 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 
 @Entity
 public class Users {
     @Id
-
+    @NotNull
     private String id_users;
-    
+    @NotNull
+    private String imagenBase64;
+    @NotNull
     private String name;
-    
+    @NotNull
     private String apellido;
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[\\W_]).*$", 
             message = "La contraseña debe contener al menos una letra mayúscula y un signo de puntuación.")
@@ -29,16 +28,17 @@ public class Users {
    
     @Enumerated(EnumType.STRING)
     private types.typeUser typeUser;
-    
     @NotNull
     @Column(nullable=false)
+
     private LocalDate fechaIngreso;
 
     public Users() {
     }
 
-    public Users(String id_users, String name, String apellido, String password, types.typeUser typeUser, LocalDate fechaIngreso) {
+    public Users(String id_users, String imagenBase64, String imagenPath, String name, String apellido, String password, types.typeUser typeUser, LocalDate fechaIngreso) {
         this.id_users = id_users;
+        this.imagenBase64 = imagenBase64;
         this.name = name;
         this.apellido = apellido;
         this.password = password;
@@ -46,7 +46,15 @@ public class Users {
         this.fechaIngreso = fechaIngreso;
     }
 
-    
+   
+
+    public String getImagenBase64() {
+        return imagenBase64;
+    }
+
+    public void setImagenBase64(String imagenBase64) {
+        this.imagenBase64 = imagenBase64;
+    }    
 
     public LocalDate getFechaIngreso() {
         return fechaIngreso;
@@ -97,5 +105,5 @@ public class Users {
     public void setTypeUser(types.typeUser typeUser) {
         this.typeUser = typeUser;
     }
-    
+
 }

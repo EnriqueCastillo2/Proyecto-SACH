@@ -1,0 +1,81 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="habitacion-container">
+  <div class="header-section">
+    <div class="logo-overlay">
+      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
+      <h1>Huéspedes</h1>
+    </div>
+  </div>
+
+  @if(huespedResponse.length == 0){
+  <div class="no-users-message">
+    <h2>No hay huespeds registrados</h2>
+  </div>
+  }
+  <div class="tabla-container">
+    <table class="habitacion-table">
+      <thead>
+        <tr>
+          <th>Habitacion</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Telefono</th>
+          <th>No. Personas</th>
+          <th>Monto</th>
+          <th>Estado</th>
+          <th>Fecha Ingreso</th>
+          <th>Fecha Salida</th>
+          <th>Usuario</th>
+        
+        </tr>
+      </thead>
+      <tbody>
+        @for(h_Response of huespedResponse; track h_Response.idHuesped){
+        <tr>
+          <td style="color: red; display: flex;justify-content: center;">{{ h_Response.habitacionAsignada.id_Rooms }}</td>
+          <td>{{ h_Response.nameHuesped }}</td>
+          <td>{{ h_Response.apellidoHuesped }}</td>
+          <td>{{ h_Response.telefono }}</td>
+          <td style="display:flex; justify-content:center;">{{ h_Response.numPersonas }}</td>
+          <td>{{ h_Response.monto }}</td>
+          <td>{{ h_Response.statusHuesped }}</td>
+          <td>{{ h_Response.fechaRegistro | date : "short" }}</td>
+          <td>{{ h_Response.fechaSalida | date : "short" }}</td>
+          <td>{{ h_Response.usuarioRegistrador.name }}</td>
+
+          <!-- <td class="acciones-cell">
+            <div class="btn-group">
+              <button
+                class="btn-editar"
+                (click)="abrirFormularioRegistro(user)"
+              >
+                Editar
+              </button>
+              <button class="btn-eliminar" (click)="delete(user.id_users)">
+                Eliminar
+              </button>
+            </div>
+          </td> -->
+        </tr>
+        }
+      </tbody>
+    </table>
+    <!-- <button
+      mat-raised-button
+      class="btn-registrar"
+      (click)="abrirFormularioRegistro(null)"
+    >
+      + Registrar Usuario
+    </button> -->
+  </div>
+  <!-- @if (isLoading) {
+  <div class="loader-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Guardando usuario y cargando datos...</p>
+  </div>
+  } -->
+</div>

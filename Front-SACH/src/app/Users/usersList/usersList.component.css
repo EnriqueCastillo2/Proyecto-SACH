@@ -1,0 +1,204 @@
+.usuarios-container {
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 30px;
+  padding: 2rem;
+  background-color: 
+#f8f8f8;
+  min-height: 100vh;
+}
+
+.logo-overlay {
+  display: flex;
+  align-items: center;
+  flex-direction: row; /* Cambiado de column a row para alinear horizontalmente /
+  gap: 1.5rem; / Espacio entre logo y título */
+}
+
+.logo{
+width: 125px;
+height: 125px;
+border-radius: 50%;
+object-fit: cover;
+border: 5px solid 
+#0a1f3a; 
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin-bottom: 2rem;
+}
+
+.logo-overlay h1 {
+   color: 
+#0c2344;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.logo-overlay h1::after {
+  content: '';
+position: absolute;
+bottom: -12px;
+left: 0;
+transform: translateX(0); 
+width: 100%;
+height: 4px;
+background: linear-gradient(90deg, 
+#0a1f3a, 
+#d4af37, 
+#0a1f3a);
+border-radius: 15px;
+}
+
+/* Estilos para la tabla */
+
+
+.usuarios-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.usuarios-table thead {
+  background: linear-gradient(135deg, 
+#0a1f3a, 
+#1a3a6a); 
+  color: 
+#d4af37; 
+  box-shadow: 0 4px 12px rgba(10, 31, 58, 0.2);
+}
+
+.usuarios-table th {
+  padding: 1.2rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-size: 2rem;
+  position: relative;
+}
+
+.usuarios-table th:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 25%;
+  height: 50%;
+  width: 1px;
+  background-color: rgba(212, 175, 55, 0.3); /* Línea divisoria dorada tenue */
+}
+
+.usuarios-table tbody tr {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+
+.usuarios-table tbody tr:hover {
+ background-color: 
+#f0f4f9;
+  
+  box-shadow: 0 4px 12px rgba(10, 31, 58, 0.1);
+}
+
+.usuarios-table td {
+  padding: 1.2rem 1.5rem;
+  color: #333;
+  border-bottom: 1px solid 
+#eaeaea;
+  font-size: 25px;
+}
+
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid 
+#d4af37; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.password-cell {
+  font-family: 'Courier New', monospace;
+  color: #666;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-editar, .btn-eliminar {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.btn-editar {
+  background-color: #0a1f3a;
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #1a3a6a; /* Un azul un poco más claro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(10, 31, 58, 0.2);
+}
+
+.btn-eliminar {
+  background-color: #d4af37;
+  color: #0a1f3a;
+  font-weight: 600;
+}
+
+.btn-eliminar:hover {
+  background-color: #e8c252; /* Un dorado más claro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(212, 175, 55, 0.2);
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 20px;
+  font-weight: 500;
+  color: #555;
+}
+.btn-registrar {
+  display: block;
+  margin: 20px auto 0 auto;
+  background-color: #0a1f3a; /* Azul moderno */
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}

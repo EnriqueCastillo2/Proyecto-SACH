@@ -1,0 +1,190 @@
+/* Estilos base de la tarjeta */
+.tarjeta-habitacion {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 300px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tarjeta-habitacion:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-habitacion.Habitación_Normal {
+  border: 6px solid #003064;
+}
+.tarjeta-habitacion.Habitación_Doble {
+  border: 4px solid #0a2a3a;
+}
+
+.tarjeta-habitacion.Habitación_Plus {
+  border: 4px solid #000000;
+}
+
+/* Estados de la habitación */
+.tarjeta-habitacion.LIBRE {
+  box-shadow: 0 0 12px 4px #189b1c;
+}
+
+.tarjeta-habitacion.OCUPADA {
+  box-shadow: 0 0 12px 4px #f44336;
+}
+
+.tarjeta-habitacion.LIMPIEZA {
+  box-shadow: 0 0 12px 4px #ffc107;
+}
+
+/* Contenedor de imagen */
+.contenedor-imagen {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+
+}
+
+.imagen-habitacion {
+  font-family: "Bodoni MT Black", "Playfair Display", serif;
+  font-size: 150px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #deaa1a;
+}
+.imagen-habitacion.Habitación_Normal {
+
+   color:#d29a00;
+  border-bottom: #003064 6px solid;
+  box-sizing: border-box; 
+  
+}
+
+.imagen-habitacion.Habitación_Doble {
+  background-color: #0a2a3a;
+}
+
+.imagen-habitacion.Habitación_Plus {
+  background-color:  #000000;
+}
+
+/* Badge de estado */
+.badge-estado {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.badge-estado.LIBRE {
+  background-color: #4caf50;
+  color: white;
+}
+
+.badge-estado.OCUPADA {
+  background-color: #f44336;
+  color: white;
+}
+
+.badge-estado.LIMPIEZA {
+  background-color: #ffc107;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Detalles de la habitación */
+.detalles-habitacion {
+  padding: 1rem;
+}
+
+.encabezado-habitacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.tipo-habitacion {
+  font-size: 1.3rem;
+  
+  color: #0a2a3a;
+  margin: 0;
+}
+
+.nivel-habitacion {
+  font-size: 1.4rem;
+  color: goldenrod;
+ background-color: #002a5b;
+  padding: 0.3rem 0.6rem;
+  border-radius: 50%;
+ 
+}
+
+.info-habitacion p {
+  margin: 0.5rem 0;
+  /* color: gold; */
+
+ 
+}
+
+.info-habitacion strong {
+  color: #0a2a3a;
+}
+
+
+
+.acciones-habitacion {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.tarjeta-habitacion:hover .acciones-habitacion {
+  opacity: 1;
+}
+
+.btn-icono {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s;
+}
+
+.btn-icono:hover {
+  background: #f0f0f0;
+}
+
+.btn-icono i {
+  font-size: 18px;
+  color: #333;
+}
+
+.btn-icono.editar i {
+  color: #2196f3;
+}
+
+.btn-icono.eliminar i {
+  color: #e53935;
+}

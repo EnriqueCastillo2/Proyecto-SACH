@@ -1,0 +1,59 @@
+
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Nombre Huesped</mat-label>
+    <input matInput formControlName="nameHuesped">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Apellido Huesped</mat-label>
+    <input matInput formControlName="apellidoHuesped">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Telefono Huesped</mat-label>
+    <input matInput formControlName="telefono">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Número de Personas</mat-label>
+    <input matInput type="number" formControlName="numPersonas">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Estado</mat-label>
+    <input matInput formControlName="statusHuesped">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Monto</mat-label>
+    <input matInput type="number" formControlName="monto">
+  </mat-form-field>
+
+  <div formGroupName="usuarioRegistrador">
+  <mat-form-field>
+    <mat-label>Id Usuario</mat-label>
+    <input matInput formControlName="id_users">
+  </mat-form-field>
+</div>
+
+<div formGroupName="habitacionAsignada">
+  <mat-form-field>
+    <mat-label>Número de Habitación</mat-label>
+    <input matInput formControlName="id_Rooms">
+  </mat-form-field>
+</div>
+
+  <mat-form-field class="full-width">
+    <mat-label>Introduzca un rango de fechas</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate formControlName="fechaRegistro" placeholder="Fecha de inicio">
+      <input matEndDate formControlName="fechaSalida" placeholder="Fecha de finalización">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit">Guardar</button>
+  <button mat-raised-button type="button">Cancelar</button>
+</form>

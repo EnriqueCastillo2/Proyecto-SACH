@@ -1,0 +1,59 @@
+<div class="RegistroHuesped-container">
+  <div class="header-section">
+    <div class="logo-overlay">
+      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
+      <h1>Reservación</h1>
+    </div>
+  </div>
+
+  <div class="registro-container">
+    <div class="huesped-area">
+      <h2>Registrar Huesped</h2>
+      <div class="huesped-form">
+        <app-form-registro ></app-form-registro></div>
+      
+    </div>
+    <div class="right-column" *ngIf="user">
+      <div class="user-area">
+        <h2 st>Datos Huesped</h2>
+
+        <div class="dataUser">
+          <div class="left">
+            <img
+              class="user-image"
+              [src]="urlImg + user.imagenBase64"
+              alt="{{ user.name }}"
+            />
+          </div>
+
+          <div class="rigth">
+            <h3>Nombre: {{ user.name }}</h3>
+            <h3>Apellido: {{ user.apellido }}</h3>
+            <h3>Rol: {{ user.typeUser }}</h3>
+          </div>
+        </div>       
+      </div>
+      <div class="habitacion-area">
+        <div class="user-area">
+          <h2 st>Datos Habitacion</h2>
+  
+          <div class="dataUser">
+           <div class="left">
+            <p class="user-image">
+              {{room.id_Rooms}}</p>
+          </div>
+  
+          <div class="rigth">   
+             <h3>Precio: {{  room.precio | currency:'Q':'symbol':'1.2-2' }}</h3>
+              <h3>Tipo: {{ room.habitacion }}</h3>
+              <h3>Estado: {{ room.estado}}</h3>
+            <h3>Nivel: {{ room.nivel }}</h3>
+          
+          </div>
+        </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

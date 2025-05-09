@@ -1,0 +1,69 @@
+<h2 mat-dialog-title class="dialog-title">Registro de Habitación</h2>
+
+<form
+  [formGroup]="roomForm"
+  (ngSubmit)="onSubmit()"
+  mat-dialog-content
+  class="form-container"
+>
+  <div class="form-content">
+
+
+    <!-- Formulario a la derecha -->
+    <div class="fields-section">
+      <mat-form-field appearance="fill" class="custom-form-field">
+        <mat-label>ID de habitación</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="id_Rooms"
+          placeholder="Ej: 101"
+        />
+        <mat-error *ngIf="roomForm.get('id_Rooms')?.hasError('required')"
+          >El ID es obligatorio</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de Habitación</mat-label>
+        <mat-select formControlName="habitacion">
+          @for (tipo of typesRooms; track tipo) {
+            <mat-option [value]="tipo">
+              {{ tipo }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nivel</mat-label>
+        <mat-select formControlName="nivel">
+          <mat-option *ngFor="let nivel of typesRoomsLevel" [value]="nivel">
+            {{ nivel }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option *ngFor="let estado of typesRoomsStatus" [value]="estado">
+            {{ estado }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Precio</mat-label>
+        <input matInput formControlName="precio" type="number" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Campo Base64 oculto -->
+
+  <div class="form-actions" mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
+  </div>
+</form>

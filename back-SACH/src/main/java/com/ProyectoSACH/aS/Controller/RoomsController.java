@@ -4,19 +4,16 @@ import com.ProyectoSACH.aS.Model.Rooms;
 import com.ProyectoSACH.aS.Repository.ApiResponse;
 import com.ProyectoSACH.aS.Service.RoomsService;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("rooms")
 public class RoomsController {
@@ -29,8 +26,9 @@ public class RoomsController {
         List<Rooms> rooms= roomsService.getRooms();
         if(rooms.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse("No hay habitaciones", HttpStatus.NOT_FOUND.value(), null));
+                    .body(new ApiResponse("No hay habitaciones Registradas", HttpStatus.NOT_FOUND.value(), null));
         }
+         
         return ResponseEntity.status(HttpStatus.OK)
                 .body(rooms);          
     }
@@ -89,7 +87,23 @@ public class RoomsController {
         roomsService.deleteRooms(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
                 .body( new ApiResponse("Usuario Eliminado Con exito",HttpStatus.NO_CONTENT.value(), null));
-        
-        
+
+    }
+
+    @PatchMapping("/{id}/estado")
+    public ResponseEntity<?> actualizarEstado(@PathVariable Integer id, @RequestBody Map<String, String> body) {
+        String estado = body.get("estado");
+        if (estado == null || estado.isEmpty()) {
+            return ResponseEntity.badRequest().body("El campo 'estado' es requerido.");
+        }
+
+        try {
+            Rooms roomActualizada = roomsService.actualizarEstado(id, estado);
+            return ResponseEntity.ok(roomActualizada);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

@@ -1,0 +1,86 @@
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.dialog-title {
+  background-color: #002244;
+  color: #bfa13a; 
+  font-weight: bold;
+  text-align: center;
+  
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 20px, 20px, 0px, 0px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-content {
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.image-preview {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #002244; /* azul marino */
+}
+
+.fields-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Colores personalizados */
+.mat-raised-button.mat-accent {
+  background-color: #002244; /* azul marino */
+  color: white;
+}
+
+.mat-raised-button.mat-accent:hover {
+  background-color: #001c3a;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: #bfa13a; /* dorado */
+  color: #fff;
+}
+
+.mat-raised-button.mat-primary:hover {
+  background-color: #a68c2a;
+}
+.mat-form-field {
+  font-size: 1.1rem;
+}
+button {
+  font-size: 1.05rem;
+  padding: 10px 24px;
+}

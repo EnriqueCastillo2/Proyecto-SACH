@@ -26,16 +26,15 @@ public class Rooms {
 
     public Rooms() {
     }
-    
 
     public Rooms(Integer id_Rooms, types.typesRooms habitacion, types.typesRooms_level nivel, types.typesRooms_Status estado, Double precio) {
         this.id_Rooms = id_Rooms;
         this.habitacion = habitacion;
         this.nivel = nivel;
         this.estado = estado;
+       
         this.precio = precio;
     }
-    
     
 
     public Integer getId_Rooms() {
@@ -77,7 +76,8 @@ public class Rooms {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
+
+  
     
     
     

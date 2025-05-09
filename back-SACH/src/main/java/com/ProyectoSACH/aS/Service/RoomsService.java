@@ -1,6 +1,7 @@
 package com.ProyectoSACH.aS.Service;
 
 import com.ProyectoSACH.aS.Model.Rooms;
+import com.ProyectoSACH.aS.Model.types;
 import com.ProyectoSACH.aS.Repository.RoomsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
@@ -14,6 +15,7 @@ public class RoomsService {
     @Autowired
     private RoomsRepository roomsRespository;
     
+     
     public List<Rooms> getRooms(){
         return roomsRespository.findAll();
     }
@@ -23,6 +25,7 @@ public class RoomsService {
     }
     
     public Rooms createRooms(Rooms rooms){
+       
         return roomsRespository.save(rooms);
     }
     
@@ -30,7 +33,10 @@ public class RoomsService {
         if (!roomsRespository.existsById(id)) {
             throw new EntityNotFoundException("Habitacion no encontrada"); 
         }
+  
         return roomsRespository.save(rooms);
+        
+        
     }
     
     public void deleteRooms(Integer id){
@@ -40,5 +46,20 @@ public class RoomsService {
     public boolean existeRoom(Integer id){
         return roomsRespository.existsById(id);
     }
-    
+
+
+    public Rooms actualizarEstado(Integer id, String nuevoEstado) {
+        Rooms room = roomsRespository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Habitación no encontrada con ID: " + id));
+
+        try {
+            types.typesRooms_Status estadoEnum = types.typesRooms_Status.valueOf(nuevoEstado.toLowerCase());
+            room.setEstado(estadoEnum);
+            return roomsRespository.save(room);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Estado no válido: " + nuevoEstado);
+        }
+    }
+
+
 }

@@ -1,0 +1,82 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="usuarios-container">
+  <div class="header-section">
+    <div class="logo-overlay">
+      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
+      <h1>Usuarios</h1>
+    </div>
+  </div>
+
+
+  @if(users.length == 0){
+  <div class="no-users-message">
+    <h2>No hay usuarios registrados</h2>
+  </div>
+  }
+  <div class="tabla-container">
+    <table class="usuarios-table">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Password</th>
+          <th>Tipo Usuario</th>
+          <th>Fecha Ingreso</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(user of users; track user.id_users){
+        <tr>
+          <td>
+            <img
+              [src]="user.imagenBase64"
+              
+              alt="Foto de {{ user.name }}"
+              class="user-image"
+            />
+          </td>
+          <td>{{ user.id_users }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.apellido }}</td>
+          <td class="password-cell">{{ user.password }}</td>
+          <td>{{ user.typeUser }}</td>
+          <td>{{ user.fechaIngreso }}</td>
+          <td class="acciones-cell">
+            <div class="btn-group">
+              <button
+                class="btn-editar"
+                (click)="abrirFormularioRegistro(user)"
+              >
+                Editar
+              </button>
+              <button class="btn-eliminar" (click)="delete(user.id_users)">
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <button
+      mat-raised-button
+      class="btn-registrar"
+      (click)="abrirFormularioRegistro(null)"
+    >
+      + Registrar Usuario
+    </button>
+  </div>
+  @if (isLoading) {
+  <div class="loader-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Guardando usuario y cargando datos...</p>
+  </div>
+  }
+</div>

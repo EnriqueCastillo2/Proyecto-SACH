@@ -1,0 +1,71 @@
+<h2 mat-dialog-title class="dialog-title">Registro de Usuario</h2>
+
+<form
+  [formGroup]="registroForm"
+  (ngSubmit)="onSubmit()"
+  mat-dialog-content
+  class="form-container">
+  
+  <div class="form-content">
+    <!-- Imagen a la izquierda -->
+    <div class="image-section">
+      <img
+        *ngIf="imagenPreview"
+        [src]="imagenPreview"
+        alt="Vista previa"
+        class="image-preview"
+      />
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="fileInput.click()"
+      >
+        Seleccionar Imagen
+      </button>
+      <input
+        #fileInput
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        hidden
+      />
+    </div>
+
+    <!-- Formulario a la derecha -->
+    <div class="fields-section">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de Usuario</mat-label>
+        <mat-select formControlName="typeUser">
+          <mat-option
+            *ngFor="let option of typeUserOptions"
+            [value]="option.value"
+          >
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <div class="form-actions" mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
+  </div>
+</form>
