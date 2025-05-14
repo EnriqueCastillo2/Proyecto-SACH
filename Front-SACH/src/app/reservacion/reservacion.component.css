@@ -81,12 +81,19 @@ h2 {
   display: flex;
   justify-content: center;
 }
+img{
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
   
 .user-image{
   
-  width: 75%;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   border: #0a1f3a 5px solid;
+  object-fit: cover;
 }
 
 

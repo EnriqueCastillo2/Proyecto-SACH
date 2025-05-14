@@ -27,7 +27,7 @@ export class ReservacionComponent {
   ) { }
 
   ngOnInit() {
-    this.getUserById('LG0028');
+    this.getUserById("JF0018")
     this.getRoomById(101);
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Room } from './rooms.model';
+import { Room, TypesRoomsStatus } from './rooms.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,7 @@ export class RoomsService {
   deleteRoom(id: number): Observable<Room> {
     return this._http.delete<Room>(`${this.roomsUrl}/${id}`);
   }
-  
+  changeStatus(id: number, status: string): Observable<TypesRoomsStatus> {
+    return this._http.patch<TypesRoomsStatus>(`${this.roomsUrl}/${id}/estado`, { estado: status });
+  }
 }

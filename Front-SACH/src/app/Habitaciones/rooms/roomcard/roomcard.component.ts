@@ -58,7 +58,7 @@ export class RoomcardComponent {
   
 eliminarHabitacion(id: number) {
   this.roomService.deleteRoom(id).subscribe(() => {
-    this.snackBar.open('Usuario eliminado con éxito', 'Cerrar', {
+    this.snackBar.open('Habitacion eliminada con éxito', 'Cerrar', {
       duration: 3000,
     });
   });

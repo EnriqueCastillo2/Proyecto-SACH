@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import java.time.LocalDate;
@@ -14,21 +15,23 @@ import java.time.LocalDate;
 @Entity
 public class Users {
     @Id
-    @NotNull
     private String id_users;
     @NotNull
+    @NotBlank(message = "La imagen (Base64) no puede estar vacía")
     private String imagenBase64;
     @NotNull
     private String name;
     @NotNull
     private String apellido;
+
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[\\W_]).*$", 
             message = "La contraseña debe contener al menos una letra mayúscula y un signo de puntuación.")
      private String password;
    
     @Enumerated(EnumType.STRING)
     private types.typeUser typeUser;
-    @NotNull
+
+
     @Column(nullable=false)
 
     private LocalDate fechaIngreso;

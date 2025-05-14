@@ -6,10 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
- // Ajusta si está en otro path
-// Ajusta el path si es necesario
 import { HuespedService } from '../../Huesped/huesped.service';
 import { HuespedRequest } from '../../Huesped/huesped.model';
+import { RoomsService } from '../../Habitaciones/rooms.service';
+import { TypesRoomsStatus } from '../../Habitaciones/rooms.model';
 
 @Component({
   selector: 'app-form-registro',
@@ -30,7 +30,9 @@ export class FormRegistroComponent {
 
   formulario: FormGroup;
 
-  constructor(private fb: FormBuilder, private huespedService: HuespedService,
+  constructor(private fb: FormBuilder, 
+    private huespedService: HuespedService,
+    private habitacionService: RoomsService
   ) {
     this.formulario = this.fb.group({
       nameHuesped: ['', Validators.required],
@@ -65,7 +67,13 @@ export class FormRegistroComponent {
         error: (error) => {
           console.error('Error al crear huésped:', error);
         }
-      
+      });
+
+      this.habitacionService.changeStatus(huespedRequest.habitacionAsignada.id_Rooms,TypesRoomsStatus.ocupada).subscribe({
+        next: (respuesta) => {
+
+          console.log('Estado de habitación actualizado:', respuesta);
+        }
       });
     } else {
       this.formulario.markAllAsTouched();

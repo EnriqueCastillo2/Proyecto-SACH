@@ -12,11 +12,11 @@
   </div>
 
 
-  @if(users.length == 0){
-  <div class="no-users-message">
-    <h2>No hay usuarios registrados</h2>
-  </div>
-  }
+  <ng-container *ngIf="(users$ | async) as users">
+    <div class="no-users-message" *ngIf="users.length === 0">
+      <h2>No hay usuarios registrados</h2>
+    </div>
+  </ng-container>
   <div class="tabla-container">
     <table class="usuarios-table">
       <thead>
@@ -32,12 +32,10 @@
         </tr>
       </thead>
       <tbody>
-        @for(user of users; track user.id_users){
-        <tr>
+        <tr *ngFor="let user of users$ | async; trackBy: trackByUserId">
           <td>
             <img
-              [src]="user.imagenBase64"
-              
+              [src]="user.imagenBase64+'?t=' + timestamp"
               alt="Foto de {{ user.name }}"
               class="user-image"
             />
@@ -52,8 +50,7 @@
             <div class="btn-group">
               <button
                 class="btn-editar"
-                (click)="abrirFormularioRegistro(user)"
-              >
+                (click)="abrirFormularioRegistro(user)">
                 Editar
               </button>
               <button class="btn-eliminar" (click)="delete(user.id_users)">
@@ -62,7 +59,6 @@
             </div>
           </td>
         </tr>
-        }
       </tbody>
     </table>
     <button

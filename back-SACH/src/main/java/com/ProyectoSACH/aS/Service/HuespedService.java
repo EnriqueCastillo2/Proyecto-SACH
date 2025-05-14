@@ -1,5 +1,6 @@
 package com.ProyectoSACH.aS.Service;
 
+import com.ProyectoSACH.aS.GlobalExceptionHandler.ResourceNotFoundException;
 import com.ProyectoSACH.aS.Model.Huespedes;
 import com.ProyectoSACH.aS.Repository.HuespedRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,16 +14,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class HuespedService {
    
-    @Autowired
-    private HuespedRepository huespedRepository;
-    
+
+    private final HuespedRepository huespedRepository;
+
+    public HuespedService(HuespedRepository huespedRepository) {
+        this.huespedRepository = huespedRepository;
+    }
+
     public List<Huespedes> getAllHuespedes(){ 
+        List<Huespedes> huespedes= huespedRepository.findAll();
+        if(huespedes.isEmpty()){
+            throw new ResourceNotFoundException("No existen huespedes registrados");
+        }
+
         return huespedRepository.findAll();
     }
     
     
-    public Optional<Huespedes> getHuespedsById(String id){
-        return huespedRepository.findById(id);
+    public Huespedes getHuespedsById(String id){
+        return huespedRepository.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("Huesped no encontrado",id));
+
     }
     
     
@@ -40,9 +52,7 @@ public class HuespedService {
    
     
     public Huespedes updateHuespedes(String id, Huespedes huespedes){
-        if (!huespedRepository.existsById(id)){
-            throw new EntityNotFoundException("Habitacion no encontrada");
-        }
+       getHuespedsById(id);
         return huespedRepository.save(huespedes);
     }
     
@@ -51,9 +61,7 @@ public class HuespedService {
     }
     
 
-    public boolean existeHuesped(String id){
-          return huespedRepository.existsById(id);
-    }
+
           
     
     private String generateUniqueId(String nombre, String apellido) {

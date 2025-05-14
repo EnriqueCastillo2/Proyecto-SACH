@@ -1,5 +1,6 @@
 package com.ProyectoSACH.aS.Service;
 
+import com.ProyectoSACH.aS.GlobalExceptionHandler.ResourceNotFoundException;
 import com.ProyectoSACH.aS.Model.Rooms;
 import com.ProyectoSACH.aS.Model.types;
 import com.ProyectoSACH.aS.Repository.RoomsRepository;
@@ -7,50 +8,55 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoomsService {
     
-    @Autowired
-    private RoomsRepository roomsRespository;
-    
-     
+
+    private final RoomsRepository roomsRespository;
+
+    public RoomsService(RoomsRepository roomsRespository) {
+        this.roomsRespository = roomsRespository;
+    }
+
+
     public List<Rooms> getRooms(){
+        List<Rooms> rooms= roomsRespository.findAll();
+        if(rooms.isEmpty()){
+            throw new ResourceNotFoundException("No se encontraron habitaciones");
+        }
         return roomsRespository.findAll();
     }
     
-    public Optional<Rooms> getRoomsById(Integer id){
-        return roomsRespository.findById(id);
-    }
+    public Rooms getRoomsById(Integer id){
+        return roomsRespository.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("Habitacion no encontrada", id)); }
+
     
-    public Rooms createRooms(Rooms rooms){
-       
-        return roomsRespository.save(rooms);
-    }
+    public Rooms createRooms(Rooms rooms){return roomsRespository.save(rooms);}
+
     
     public Rooms updateRooms(Integer id,Rooms rooms){
-        if (!roomsRespository.existsById(id)) {
-            throw new EntityNotFoundException("Habitacion no encontrada"); 
-        }
-  
-        return roomsRespository.save(rooms);
-        
-        
+       getRoomsById(id);
+       return roomsRespository.save(rooms);
     }
     
     public void deleteRooms(Integer id){
         roomsRespository.deleteById(id);
+        try {roomsRespository.deleteById(id);
+        }catch (DataIntegrityViolationException ex){
+            throw new ResourceNotFoundException("No se puede eliminar la habitacion debido a que esta relacionada" +
+                    "con un huesped");
+        }
     }
     
-    public boolean existeRoom(Integer id){
-        return roomsRespository.existsById(id);
-    }
+
 
 
     public Rooms actualizarEstado(Integer id, String nuevoEstado) {
-        Rooms room = roomsRespository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Habitación no encontrada con ID: " + id));
+        Rooms room = getRoomsById(id);
 
         try {
             types.typesRooms_Status estadoEnum = types.typesRooms_Status.valueOf(nuevoEstado.toLowerCase());

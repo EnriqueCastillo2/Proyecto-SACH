@@ -15,7 +15,7 @@ export interface Huesped {
 
 export interface HuespedRequest extends Huesped{ // Igual aquí
     usuarioRegistrador: {id_users: string};
-    habitacionAsignada: {id_Rooms: string};
+    habitacionAsignada: {id_Rooms: number};
   }
   
   export interface HuespedResponse extends Huesped{

@@ -1,3 +1,5 @@
+import { Type } from "@angular/core";
+
 export enum TypesRooms {
     normal = 'normal',
     doble = 'doble',
@@ -22,3 +24,4 @@ export enum TypesRooms {
     estado: TypesRoomsStatus;
     precio: number;
   }
+

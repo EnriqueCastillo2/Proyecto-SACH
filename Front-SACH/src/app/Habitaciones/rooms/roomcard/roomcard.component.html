@@ -1,4 +1,13 @@
 <div class="tarjeta-habitacion" [ngClass]="[getClaseEstado(room.estado),getTipoHabitacion(room.habitacion)]">
+  <div class="acciones-habitacion">
+        <button class="btn-icono editar" (click)="editarHabitacion()">
+          <i class="material-icons">edit</i>
+        </button>
+        <button class="btn-icono eliminar" (click)="eliminarHabitacion(room.id_Rooms)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
+  
   <a routerLink="/RegistroHuesped" style="text-decoration: none; color: inherit;">
     <div class="contenedor-imagen">
       <span class="imagen-habitacion" [ngClass]="getTipoHabitacion(room.habitacion)">{{room.id_Rooms}}</span> 
@@ -6,14 +15,7 @@
       <span class="badge-estado" [ngClass]="getClaseEstado(room.estado)">
         {{ getEstadoUppercase(room.estado) }}
       </span>
-      <!-- <div class="acciones-habitacion">
-        <button class="btn-icono editar" (click)="editarHabitacion()">
-          <i class="material-icons">edit</i>
-        </button>
-        <button class="btn-icono eliminar" (click)="eliminarHabitacion(room.id_Rooms)">
-          <i class="material-icons">delete</i>
-        </button>
-      </div> -->
+   
     </div>
     <div class="detalles-habitacion">
       <div class="encabezado-habitacion">

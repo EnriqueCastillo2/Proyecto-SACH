@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class AllServices {
 
     
-    private static final String UPLOAD_DIR = "src/main/resources/static/uploads/";
+    private static final String UPLOAD_DIR = "C:/Users/flavi/Videos/SACH/uploads/";
 
     public static String saveImageFromBase64(String base64Image, Object userId) {
         try {

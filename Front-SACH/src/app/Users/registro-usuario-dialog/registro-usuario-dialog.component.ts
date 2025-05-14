@@ -36,6 +36,7 @@ import { User } from '../user.model';
 export class RegistroUsuarioDialogComponent implements OnInit {
   registroForm!: FormGroup;
   imagenPreview: string | null = null;
+  // timestamp: number = Date.now();
 
   constructor(
     private fb: FormBuilder,
@@ -54,15 +55,12 @@ export class RegistroUsuarioDialogComponent implements OnInit {
     this.registroForm = this.fb.group({
       name: [this.data?.name || '', Validators.required],
       apellido: [this.data?.apellido || '', Validators.required],
-      password: [
-        this.data?.password || '',
-        [Validators.required, Validators.minLength(6)],
-      ],
+      password: [ this.data?.password || '',  [Validators.required, Validators.minLength(6)],],
       typeUser: [this.data?.typeUser || '', Validators.required],
       imagenBase64: [this.data?.imagenBase64 || ''],
     });
 
-    this.imagenPreview = this.data?.imagenBase64 || null;
+    this.imagenPreview = this.generarPreviewImagen(this.data?.imagenBase64 || null);
   }
 
   onFileSelected(event: Event): void {
@@ -94,6 +92,7 @@ export class RegistroUsuarioDialogComponent implements OnInit {
   }
 
   onSubmit() {
+     
     if (this.registroForm.valid) {
       const usuario = this.registroForm.value;
       
@@ -108,9 +107,10 @@ export class RegistroUsuarioDialogComponent implements OnInit {
               duration: 3000,
             });
             this.dialogRef.close('actualizado');
+              
           },
-          error: (error) => {
-            console.error('Error al actualizar el usuario:', error);
+          error: () => {
+          
             this.snackBar.open('Error al actualizar el usuario', 'Cerrar', {
               duration: 3000,
             });
@@ -144,4 +144,15 @@ export class RegistroUsuarioDialogComponent implements OnInit {
     this.imagenPreview = null;
     this.dialogRef.close();
   }
+  private generarPreviewImagen(imagen: string | null): string | null {
+  if (!imagen) return null;
+
+  // Si es una URL relativa o absoluta, le agregamos un parámetro para evitar caché
+  if (imagen.startsWith('http') || imagen.startsWith('/uploads/')) {
+    return `${imagen}?t=${Date.now()}`;
+  }
+
+  // Si es base64, la mostramos directamente
+  return `data:image/png;base64,${imagen}`;
+}
 }

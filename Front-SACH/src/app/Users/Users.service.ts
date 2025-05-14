@@ -1,19 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  private usersSubject= new BehaviorSubject<User[]>([]);
+  users$= this.usersSubject.asObservable();
   private _http=inject(HttpClient);
+
   private userUrl= 'http://localhost:8080/users';
 
+  loadUsers(){
+    this._http.get<User[]>(this.userUrl).subscribe((users)=>{
+      const newUsers = users.map(user => ({ ...user }));
+      this.usersSubject.next(users);});  
+  }
  
 
   getUsers():Observable<User[]>{
-    return this._http.get<User[]>(this.userUrl);
+  return this.users$
   }
 
   getUserbyId(id: string): Observable<User> {
@@ -21,14 +29,28 @@ export class UsersService {
   }
 
   createUser(user: User): Observable<User> {
-    return this._http.post<User>(this.userUrl, user);
+    return this._http.post<User>(this.userUrl, user).pipe(
+      tap(() =>{
+        this.loadUsers();
+
+        })
+    );
   }
 
   updateUser(id_users: string, user: User): Observable<User> {
-    return this._http.put<User>(`${this.userUrl}/${id_users}`, user);
+    return this._http.put<User>(`${this.userUrl}/${id_users}`, user).pipe(
+      tap(() =>{
+        this.loadUsers();
+      })
+    );
 
   } 
+
   deleteUser(id: string): Observable<User> {
-    return this._http.delete<User>(`${this.userUrl}/${id}`);
+    return this._http.delete<User>(`${this.userUrl}/${id}`).pipe(
+      tap(() =>{
+        this.loadUsers();
+      })
+    );
   }
 }
