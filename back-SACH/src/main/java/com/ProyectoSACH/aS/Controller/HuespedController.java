@@ -2,17 +2,12 @@
 package com.ProyectoSACH.aS.Controller;
 
 import com.ProyectoSACH.aS.Model.Huespedes;
-import com.ProyectoSACH.aS.Repository.ApiResponse;
 import com.ProyectoSACH.aS.Service.HuespedService;
 import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("huesped")
 public class HuespedController {

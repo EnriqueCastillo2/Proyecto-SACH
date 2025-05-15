@@ -4,11 +4,10 @@ import com.ProyectoSACH.aS.Model.Users;
 import com.ProyectoSACH.aS.Service.UsersService;
 import java.util.List;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+
 @RestController
 @RequestMapping("users")
 public class UsersController {
@@ -33,7 +32,7 @@ public class UsersController {
             }
         });
 
-        return usersService.getAllUsers();
+        return users;
     }
 
     @GetMapping("/{id}")

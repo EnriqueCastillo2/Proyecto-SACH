@@ -22,21 +22,16 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    this.userService.getUserbyId(this.username).subscribe({
-      next: (user) => {
-        if (user.password === this.password) {
-          console.log('Login exitoso');
-          // Redirigir o guardar usuario
-          this.router.navigate(['/habitaciones']);
-        } else {
-          alert('Contraseña incorrecta');
-        }
-      },
-      error: () => {
-        
-        alert('Usuario no encontrado');
-      },
-    });
+     this.userService.login(this.username, this.password).subscribe({
+    next: (token) => {
+     
+      this.router.navigate(['/habitaciones']);
+    },
+    error: (err) => {
+      alert('Credenciales incorrectas o usuario no encontrado');
+      console.error(err);
+    }
+  });
 
   }
 }

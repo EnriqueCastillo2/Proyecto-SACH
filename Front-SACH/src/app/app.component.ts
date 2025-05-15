@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 
 @Component({
@@ -9,5 +9,11 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Front-SACH';
+
+  constructor(private router: Router) {}
+
+logOut(): void {
+  localStorage.removeItem('token');
+  this.router.navigate(['/']);
+}
 }

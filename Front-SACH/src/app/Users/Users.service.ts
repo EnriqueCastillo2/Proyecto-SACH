@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { User } from './user.model';
 
 @Injectable({
@@ -53,4 +53,17 @@ export class UsersService {
       })
     );
   }
+
+  login(username: string, password: string): Observable<string> {
+  const loginData = { username, password };
+
+  return this._http.post<{ token: string }>('http://localhost:8080/auth/login', loginData).pipe(
+    tap(response => {
+      localStorage.setItem('token', response.token); // Guardamos el token
+    }),
+    map(response => response.token) // Devolvemos solo el token si lo necesitas
+  );
+}
+
+
 }

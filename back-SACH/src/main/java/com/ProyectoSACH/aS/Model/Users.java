@@ -33,8 +33,8 @@ public class Users {
 
 
     @Column(nullable=false)
-
     private LocalDate fechaIngreso;
+    
 
     public Users() {
     }
