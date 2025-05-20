@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Room } from '../../rooms.model';
 import { CommonModule } from '@angular/common';
 import { RoomsService } from '../../rooms.service';
@@ -12,16 +12,27 @@ import { RouterLink } from '@angular/router';
   templateUrl: './roomcard.component.html',
   styleUrl: './roomcard.component.css'
 })
-export class RoomcardComponent {
+export class RoomcardComponent implements OnInit {
+
+admin: boolean=false;
+@Input() room!: Room;
 
   constructor(private roomService:RoomsService,
     private snackBar: MatSnackBar,
     private roomComponent: RoomsComponent,
   ) { }
 
+  ngOnInit(): void {
+    this.isAdmin();
+  }
 
+ isAdmin() {
+  const localrol=localStorage.getItem('rol');
+  if(localrol=='admin'){
+  this.admin=true;
+  }
+ }
 
-  @Input() room!: Room;
 
   getEstadoUppercase(estado: string): string {
     return estado.toUpperCase();
@@ -47,9 +58,7 @@ export class RoomcardComponent {
     }
   }
 
-  // getClaseBadge(estado: string): string {
-  //   return this.getClaseEstado(estado);
-  // }
+  
 
  editarHabitacion() {
   this.roomComponent.abrirFormularioRooms(this.room);

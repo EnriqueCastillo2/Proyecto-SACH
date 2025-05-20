@@ -1,9 +1,6 @@
-.header{
-    background-color: rgb(1, 1, 114);
-    color: white;
 
-}
 button{
+    width: 50px;
     background-color: white;
     color: rgb(1, 1, 114);
 }

@@ -4,7 +4,7 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterModule],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -13,7 +13,8 @@ export class AppComponent {
   constructor(private router: Router) {}
 
 logOut(): void {
-  localStorage.removeItem('token');
-  this.router.navigate(['/']);
+   localStorage.clear();
+  this.router.navigateByUrl('/');
+
 }
 }

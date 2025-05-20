@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { User } from './user.model';
+import { User, UserLogin } from './user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,14 +54,15 @@ export class UsersService {
     );
   }
 
-  login(username: string, password: string): Observable<string> {
+  login(username: string, password: string): Observable<UserLogin> {
   const loginData = { username, password };
 
-  return this._http.post<{ token: string }>('http://localhost:8080/auth/login', loginData).pipe(
+  return this._http.post<UserLogin>('http://localhost:8080/auth/login', loginData).pipe(
     tap(response => {
-      localStorage.setItem('token', response.token); // Guardamos el token
-    }),
-    map(response => response.token) // Devolvemos solo el token si lo necesitas
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('idUser', response.idUser); 
+      localStorage.setItem('rol',response.rol); 
+    })
   );
 }
 

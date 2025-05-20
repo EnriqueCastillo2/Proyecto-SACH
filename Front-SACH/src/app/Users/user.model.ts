@@ -14,3 +14,9 @@ export enum TypeUser {
     USER =  'user'
 }
 
+export interface UserLogin {
+    token: string;
+    idUser: string;
+    rol: string;
+}
+

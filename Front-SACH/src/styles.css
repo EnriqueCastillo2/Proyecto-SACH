@@ -3,3 +3,18 @@ body {
   height: 100vh;
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+/* Para Firefox */
+html {
+  scrollbar-width: none;
+}
+
+.homebutton{
+  
+}

@@ -1,0 +1,26 @@
+<div class="SACH">
+  <div class="header-section-grid">
+    <!-- Columna 1: botón Home -->
+  <div class="home-button" routerLink="/SACH/habitaciones">
+    <span class="home-label">Home</span>
+  </div>
+
+    <!-- Columna 2: logo + título -->
+    <div class="logo-overlay">
+      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
+      <h1>{{ Header }}</h1>
+    </div>
+
+    <!-- Columna 3: cerrar sesión -->
+     
+    <div class="logout-button" (click)="logout()">
+     
+      <span class="logout-label">Cerrar sesión</span>
+    </div>
+  </div>
+
+
+  <div class="body-section">
+    <router-outlet></router-outlet>
+  </div>
+</div>

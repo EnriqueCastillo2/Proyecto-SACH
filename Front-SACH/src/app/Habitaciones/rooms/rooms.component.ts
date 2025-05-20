@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { RoomcardComponent } from './roomcard/roomcard.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { RouterLink } from '@angular/router';
 import { RegistroRoomsComponent } from '../registro-rooms/registro-rooms.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
@@ -14,11 +14,12 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule, RoomcardComponent, MatProgressSpinnerModule,FormsModule],
+  imports: [CommonModule, RoomcardComponent, MatProgressSpinnerModule,FormsModule,RouterLink],
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent implements OnInit {
+admin: any;
 datosHabitacion() {
 console.log(this.rooms);
 }
@@ -37,8 +38,15 @@ console.log(this.rooms);
 
   ngOnInit() {
     this.cargarHabitaciones(); 
+    this.isAdmin();
   }
 
+  isAdmin() {
+  const localrol=localStorage.getItem('rol');
+  if(localrol=='admin'){
+  this.admin=true;
+  }
+ }
   getClaseEstado(estado: TypesRoomsStatus): string {
     return `estado-${estado}`;
   }

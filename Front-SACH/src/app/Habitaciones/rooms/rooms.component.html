@@ -1,18 +1,13 @@
   <div class="rooms-container">
-    <!-- Encabezado: NO TOCADO -->
-    <div class="header-section">
-      <div class="logo-overlay">
-        <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
-        <h1>Habitaciones</h1>
-      </div>
-    </div> 
-  
+   
     <!-- Navbar -->
     <div class="navbar">
-      <button (click)="abrirFormularioRooms(null)">Nueva Habitacion</button>
+     
       <button>Imprimir Reporte</button>
-      @if (false) {
-        <button>Control de Usuarios</button>
+      <button routerLink="/SACH/huesped">Gestion de Huespedes</button>
+      @if (admin) { 
+        <button (click)="abrirFormularioRooms(null)">Nueva Habitacion</button>
+        <button routerLink="/SACH/users"> Control de Usuarios</button>
       }
       
     </div>

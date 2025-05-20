@@ -1,10 +1,5 @@
 <div class="RegistroHuesped-container">
-  <div class="header-section">
-    <div class="logo-overlay">
-      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
-      <h1>Reservación</h1>
-    </div>
-  </div>
+ 
 
   <div class="registro-container">
     <div class="huesped-area">
@@ -16,7 +11,7 @@
     
     <div class="right-column" *ngIf="user">
       <div class="user-area">
-        <h2 st>Datos Huesped</h2>
+        <h2 st>Datos Usuario</h2>
 
         <div class="dataUser">
           <div class="left">
@@ -36,19 +31,18 @@
       </div>
       <div class="habitacion-area">
         <div class="user-area">
-          <h2 st>Datos Habitacion</h2>
+          <h2 st>Datos de Habitacion</h2>
   
           <div class="dataUser">
            <div class="left">
-            <p class="user-image">
-              {{room.id_Rooms}}</p>
+           <h3>Precio: {{  room.precio | currency:'Q':'symbol':'1.2-2' }}</h3>
+              <h3>Tipo: {{ room.habitacion }}</h3>
+              <h3>Estado: {{ room.estado}}</h3>
           </div>
   
           <div class="rigth">   
-             <h3>Precio: {{  room.precio | currency:'Q':'symbol':'1.2-2' }}</h3>
-              <h3>Tipo: {{ room.habitacion }}</h3>
-              <h3>Estado: {{ room.estado}}</h3>
-            <h3>Nivel: {{ room.nivel }}</h3>
+             
+            <textarea name="pendientes" id="pendientes"></textarea>
           
           </div>
         </div>

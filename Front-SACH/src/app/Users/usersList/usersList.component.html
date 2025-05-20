@@ -4,14 +4,7 @@
 />
 
 <div class="usuarios-container">
-  <div class="header-section">
-    <div class="logo-overlay">
-      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
-      <h1>Usuarios</h1>
-    </div>
-  </div>
-
-
+ 
   <ng-container *ngIf="(users$ | async) as users">
     <div class="no-users-message" *ngIf="users.length === 0">
       <h2>No hay usuarios registrados</h2>

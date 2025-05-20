@@ -23,9 +23,9 @@ export class LoginComponent {
 
   onSubmit(): void {
      this.userService.login(this.username, this.password).subscribe({
-    next: (token) => {
-     
-      this.router.navigate(['/habitaciones']);
+    next: (response) => {
+     const id = response.idUser;
+      this.router.navigate(['/SACH/habitaciones']);
     },
     error: (err) => {
       alert('Credenciales incorrectas o usuario no encontrado');

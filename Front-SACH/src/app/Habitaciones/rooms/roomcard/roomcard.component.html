@@ -1,5 +1,6 @@
 <div class="tarjeta-habitacion" [ngClass]="[getClaseEstado(room.estado),getTipoHabitacion(room.habitacion)]">
-  <div class="acciones-habitacion">
+  @if (admin) {
+     <div class="acciones-habitacion">
         <button class="btn-icono editar" (click)="editarHabitacion()">
           <i class="material-icons">edit</i>
         </button>
@@ -7,8 +8,10 @@
           <i class="material-icons">delete</i>
         </button>
       </div>
+  }
+ 
   
-  <a routerLink="/RegistroHuesped" style="text-decoration: none; color: inherit;">
+  <a [routerLink]="['/SACH/RegistroHuesped',room.id_Rooms]" style="text-decoration: none; color: inherit;">
     <div class="contenedor-imagen">
       <span class="imagen-habitacion" [ngClass]="getTipoHabitacion(room.habitacion)">{{room.id_Rooms}}</span> 
 

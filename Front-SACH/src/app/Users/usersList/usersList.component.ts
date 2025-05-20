@@ -34,12 +34,7 @@ export class UserHistoryComponent implements OnInit {
    this.userService.loadUsers();
   }
 
-  // cargarUsuarios() {
-  //   this.userService.getUsers().subscribe((users) => {
-  //     this.users = users;
-   
-  //   });
-  // }
+
 
   
   abrirFormularioRegistro(user: User | null) {
@@ -70,7 +65,8 @@ export class UserHistoryComponent implements OnInit {
       this.snackBar.open('Usuario eliminado con éxito', 'Cerrar', {
         duration: 3000,
       });
-     
+      this.userService.loadUsers(); 
     });
+
   }
 }

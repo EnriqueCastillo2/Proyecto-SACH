@@ -7,6 +7,7 @@ import { FormRegistroComponent } from "./form-registro/form-registro.component";
 import { CommonModule } from '@angular/common';
 import { RoomsService } from '../Habitaciones/rooms.service';
 import { Room } from '../Habitaciones/rooms.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reservacion',
@@ -16,26 +17,39 @@ import { Room } from '../Habitaciones/rooms.model';
 })
 export class ReservacionComponent {
 
-
-
+   IdlocalStorage = localStorage.getItem('idUser');
+   Idparamroute: string | null = null;
    user!: User;
    room!: Room;
-   urlImg="http://localhost:8080/uploads/"
+urlImg="http://localhost:8080/uploads/"
 
   constructor(private userService:UsersService,
               private roomService:RoomsService,
+              private route : ActivatedRoute,
   ) { }
-
+ 
   ngOnInit() {
-    this.getUserById("JF0018")
-    this.getRoomById(101);
+    this.IdlocalStorage = localStorage.getItem('idUser');
+    this.Idparamroute= this.route.snapshot.paramMap.get('id');
+
+
+    this.getUserById(this.IdlocalStorage!);
+    
+    if (this.Idparamroute !== null) {
+      const roomId = Number(this.Idparamroute);
+      if (!isNaN(roomId)) {
+        this.getRoomById(roomId);
+      }
+    }
   }
+
+ 
 
   getUserById(id: string) {
     this.userService.getUserbyId(id).subscribe(
       (response) => { 
         this.user = response;
-        console.log(this.user);
+       
       });  
 
 }
@@ -43,9 +57,7 @@ export class ReservacionComponent {
     this.roomService.getRoomById(id).subscribe(
       (response) => {
         this.room = response;
-        console.log(this.room);
 
-        
       });
   }
 
