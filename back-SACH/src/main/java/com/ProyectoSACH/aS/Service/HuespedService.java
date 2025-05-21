@@ -45,7 +45,7 @@ public class HuespedService {
         }
        
         String generatedId= generateUniqueId(huespedes.getNameHuesped(),huespedes.getApellidoHuesped());
-        huespedes.setFechaRegistro(LocalDateTime.now());
+//        huespedes.setFechaRegistro(LocalDateTime.now());
         huespedes.setIdHuesped(generatedId);
         return huespedRepository.save(huespedes);
     }

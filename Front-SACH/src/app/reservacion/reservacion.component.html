@@ -1,19 +1,19 @@
 <div class="RegistroHuesped-container">
- 
-
   <div class="registro-container">
     <div class="huesped-area">
-      <h2>Registrar Huesped</h2>
+      <h2 style="color: white">Formulario Huesped</h2>
       <div class="huesped-form">
-        <app-form-registro ></app-form-registro></div>
-      
+        <app-form-registro
+          (idUsuarioRegistrador)="onIdUsuarioRegistrador($event)"
+        ></app-form-registro>
+      </div>
     </div>
-    
-    <div class="right-column" *ngIf="user">
-      <div class="user-area">
+
+    <div class="right-column">
+      <div class="user-area" *ngIf="user">
         <h2 st>Datos Usuario</h2>
 
-        <div class="dataUser">
+        <div class="infodata">
           <div class="left">
             <img
               class="user-image"
@@ -27,26 +27,52 @@
             <h3>Apellido: {{ user.apellido }}</h3>
             <h3>Rol: {{ user.typeUser }}</h3>
           </div>
-        </div>       
-      </div>
-      <div class="habitacion-area">
-        <div class="user-area">
-          <h2 st>Datos de Habitacion</h2>
-  
-          <div class="dataUser">
-           <div class="left">
-           <h3>Precio: {{  room.precio | currency:'Q':'symbol':'1.2-2' }}</h3>
-              <h3>Tipo: {{ room.habitacion }}</h3>
-              <h3>Estado: {{ room.estado}}</h3>
-          </div>
-  
-          <div class="rigth">   
-             
-            <textarea name="pendientes" id="pendientes"></textarea>
-          
-          </div>
         </div>
-         
+      </div>
+
+      <div class="user-area">
+        <h2 st>Datos de Habitacion</h2>
+
+        <div class="infodata">
+          <div class="left">
+            <h3>
+              Precio: {{ room!.precio | currency : "Q" : "symbol" : "1.2-2" }}
+            </h3>
+            <h3>Tipo: {{ room.habitacion }}</h3>
+            <h3>Estado: {{ room.estado }}</h3>
+
+            <select
+              id="estado"
+              class="custom-select"
+              [ngClass]="estadoSeleccionado"
+              [(ngModel)]="estadoSeleccionado"
+              (change)="cambiarEstado($event)"
+            >
+              <option
+                *ngFor="let estado of estadosDisponibles"
+                [value]="estado"
+              >
+                {{ estado }}
+              </option>
+            </select>
+          </div>
+
+          <div class="rigth">
+            <h2>Detalles</h2>
+            <textarea
+              id="pendientes"
+              [(ngModel)]="mensaje"
+              (ngModelChange)="guardarMensajePorHabitacion()"
+              placeholder="Escribe un mensaje para esta habitación..."
+            ></textarea>
+
+            <button
+              (click)="borrarMensajePorHabitacion()"
+              class="borrar-mensaje-btn"
+            >
+              Eliminar mensaje
+            </button>
+          </div>
         </div>
       </div>
     </div>

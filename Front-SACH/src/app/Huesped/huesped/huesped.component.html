@@ -1,16 +1,74 @@
-<link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-  rel="stylesheet"
-/>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <div class="habitacion-container">
- 
+  <!-- Filtros con Angular Material (estilo personalizado) -->
+  <div class="filtros-container">
+    <mat-form-field appearance="outline" class="filtro-input">
+  <mat-label>Buscar por N° Habitación (3 dígitos)</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="filtroId"
+    (input)="aplicarFiltros()"
+    placeholder="Ej: 101, 205, etc."
+    maxlength="3"
+    #idInput="ngModel"
+    pattern="[0-9]{3}"
+  />
+  <mat-icon matSuffix>search</mat-icon>
+  <mat-hint *ngIf="filtroId && !esIdValido()">
+    Ingrese exactamente 3 dígitos numéricos
+  </mat-hint>
+  <mat-error *ngIf="idInput.errors?.['pattern']">
+    Solo se permiten números (3 dígitos)
+  </mat-error>
+</mat-form-field>
 
-  @if(huespedResponse.length == 0){
+
+<div *ngIf="huespedResponseFiltrados.length === 0 && filtroId && esIdValido()" 
+     style="color: #d4af37; margin: 1rem 0; font-size: 1.6rem;">
+  No se encontraron habitaciones con el número {{filtroId}}.
+  <div *ngIf="huespedResponse.length > 0">
+    Habitaciones existentes: 
+    <span *ngFor="let h of huespedResponse | slice:0:5">
+      {{h.habitacionAsignada.id_Rooms}} 
+    </span>
+    {{huespedResponse.length > 5 ? '...' : ''}}
+  </div>
+</div>
+
+    <mat-form-field appearance="outline" class="filtro-input">
+  <mat-label>Rango de fechas</mat-label>
+  <mat-date-range-input [rangePicker]="picker">
+    <input 
+      matStartDate 
+      [(ngModel)]="filtroFechaInicio" 
+      (dateChange)="aplicarFiltros()" 
+      placeholder="Fecha ingreso"
+    >
+    <input 
+      matEndDate 
+      [(ngModel)]="filtroFechaFin" 
+      (dateChange)="aplicarFiltros()" 
+      placeholder="Fecha salida"
+    >
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+
+    <button class="btn-eliminar" (click)="limpiarFiltros()">
+      Limpiar Filtros
+    </button>
+  </div>
+
+  @if(huespedResponseFiltrados.length == 0){
   <div class="no-users-message">
-    <h2>No hay huespeds registrados</h2>
+    <h2>No hay huéspedes registrados</h2>
   </div>
   }
+
   <div class="tabla-container">
     <table class="habitacion-table">
       <thead>
@@ -25,52 +83,31 @@
           <th>Fecha Ingreso</th>
           <th>Fecha Salida</th>
           <th>Usuario</th>
-        
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        @for(h_Response of huespedResponse; track h_Response.idHuesped){
+        @for(h_Response of huespedResponseFiltrados; track h_Response.idHuesped){
         <tr>
-          <td style="color: red; display: flex;justify-content: center;">{{ h_Response.habitacionAsignada.id_Rooms }}</td>
+          <td style="color: red">{{ h_Response.habitacionAsignada.id_Rooms }}</td>
           <td>{{ h_Response.nameHuesped }}</td>
           <td>{{ h_Response.apellidoHuesped }}</td>
           <td>{{ h_Response.telefono }}</td>
-          <td style="display:flex; justify-content:center;">{{ h_Response.numPersonas }}</td>
+          <td>{{ h_Response.numPersonas }}</td>
           <td>{{ h_Response.monto }}</td>
           <td>{{ h_Response.statusHuesped }}</td>
           <td>{{ h_Response.fechaRegistro | date : "short" }}</td>
           <td>{{ h_Response.fechaSalida | date : "short" }}</td>
           <td>{{ h_Response.usuarioRegistrador.name }}</td>
-
-          <!-- <td class="acciones-cell">
+          <td class="acciones-cell">
             <div class="btn-group">
-              <button
-                class="btn-editar"
-                (click)="abrirFormularioRegistro(user)"
-              >
-                Editar
-              </button>
-              <button class="btn-eliminar" (click)="delete(user.id_users)">
-                Eliminar
-              </button>
+              <button class="btn-editar"(click)="editarHuesped(h_Response,h_Response.habitacionAsignada.id_Rooms)">Editar</button>
+              <button class="btn-eliminar"(click)="delete(h_Response.idHuesped)">Eliminar</button>
             </div>
-          </td> -->
+          </td>
         </tr>
         }
       </tbody>
     </table>
-    <!-- <button
-      mat-raised-button
-      class="btn-registrar"
-      (click)="abrirFormularioRegistro(null)"
-    >
-      + Registrar Usuario
-    </button> -->
   </div>
-  <!-- @if (isLoading) {
-  <div class="loader-container">
-    <mat-spinner diameter="50"></mat-spinner>
-    <p>Guardando usuario y cargando datos...</p>
-  </div>
-  } -->
 </div>

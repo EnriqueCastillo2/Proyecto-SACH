@@ -1,35 +1,67 @@
-<div class="tarjeta-habitacion" [ngClass]="[getClaseEstado(room.estado),getTipoHabitacion(room.habitacion)]">
-  @if (admin) {
-     <div class="acciones-habitacion">
-        <button class="btn-icono editar" (click)="editarHabitacion()">
-          <i class="material-icons">edit</i>
-        </button>
-        <button class="btn-icono eliminar" (click)="eliminarHabitacion(room.id_Rooms)">
-          <i class="material-icons">delete</i>
-        </button>
-      </div>
-  }
- 
-  
-  <a [routerLink]="['/SACH/RegistroHuesped',room.id_Rooms]" style="text-decoration: none; color: inherit;">
-    <div class="contenedor-imagen">
-      <span class="imagen-habitacion" [ngClass]="getTipoHabitacion(room.habitacion)">{{room.id_Rooms}}</span> 
+<div
+  class="tarjeta-habitacion"
+  [ngClass]="[getClaseEstado(room.estado), getTipoHabitacion(room.habitacion)]"
+> 
 
-      <span class="badge-estado" [ngClass]="getClaseEstado(room.estado)">
-        {{ getEstadoUppercase(room.estado) }}
-      </span>
+
+ @if (admin) {
+   <div class="acciones-habitacion">
    
+    
+    <button class="btn-icono editar" (click)="editarHabitacion()">
+      <i class="material-icons">edit</i>
+    </button>
+    <button
+      class="btn-icono eliminar"
+      (click)="eliminarHabitacion(room.id_Rooms)"
+    >
+      <i class="material-icons">delete</i>
+    </button>
+  
+  </div>
+  }
+  <a
+    [routerLink]="['/SACH/RegistroHuesped', room.id_Rooms]"
+    style="text-decoration: none; color: inherit"
+  >
+    <div class="contenedor-imagen">
+      <span
+        class="imagen-habitacion"
+        [ngClass]="getTipoHabitacion(room.habitacion)"
+        >{{ room.id_Rooms }}</span>
+
+       <div class="contenedor-estado-y-icono">
+          <span class="badge-estado" [ngClass]="getClaseEstado(room.estado)">
+        {{ getEstadoUppercase(room.estado) }}    
+      </span>
+
+      <mat-icon style="background-color: white; border-radius: 20%;"
+      *ngIf="tieneMensaje()"
+      matBadge="!"
+      matBadgeColor="warn"
+      matBadgePosition="above after"
+      class="icono-mensaje"
+      aria-label="Mensaje disponible" >
+      message
+    </mat-icon>
+
+       </div>
     </div>
+
     <div class="detalles-habitacion">
       <div class="encabezado-habitacion">
-        <h3 class="tipo-habitacion">{{ getTipoHabitacion(room.habitacion) }}</h3>
+        <h3 class="tipo-habitacion">
+          {{ getTipoHabitacion(room.habitacion) }}
+        </h3>
         <span class="nivel-habitacion">{{ room.nivel }}</span>
       </div>
-  
+
       <div class="info-habitacion">
-        <!-- <p><strong>Nivel:</strong> {{ room.nivel }}</p> -->
-        <p><strong>Precio:</strong> {{ room.precio | currency:'Q':'symbol':'1.2-2' }}</p>
+        <p>
+          <strong>Precio:</strong>
+          {{ room.precio | currency : "Q" : "symbol" : "1.2-2" }}
+        </p>
       </div>
     </div>
   </a>
-  </div>
+</div>

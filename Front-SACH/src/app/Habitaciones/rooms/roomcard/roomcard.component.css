@@ -74,7 +74,7 @@
 
 /* Badge de estado */
 .badge-estado {
-  position: absolute;
+
   top: 12px;
   left: 12px;
   font-size: 0.75rem;
@@ -151,7 +151,7 @@
   display: flex;
   gap: 8px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  /* transition: opacity 0.3s ease; */
   z-index: 3;
 }
 
@@ -170,7 +170,7 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-  transition: background 0.3s;
+  /* transition: background 0.3s; */
 }
 
 .btn-icono:hover {
@@ -188,4 +188,22 @@
 
 .btn-icono.eliminar i {
   color: #e53935;
+}
+
+.contenedor-estado-y-icono {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: row;  
+  align-items: center;
+  gap: 8px; /* Espacio entre estado e ícono */
+  z-index: 3;
+}
+
+.icono-mensaje {
+  width: 100%;
+  font-size: 24px;
+  color: #f44336;
+  cursor: pointer;
 }

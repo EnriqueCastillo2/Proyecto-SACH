@@ -5,10 +5,12 @@ import { RoomsService } from '../../rooms.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RoomsComponent } from '../rooms.component';
 import { RouterLink } from '@angular/router';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-roomcard',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,MatBadgeModule, MatIconModule],
   templateUrl: './roomcard.component.html',
   styleUrl: './roomcard.component.css'
 })
@@ -32,6 +34,12 @@ admin: boolean=false;
   this.admin=true;
   }
  }
+ tieneMensaje(): boolean {
+    if (!this.room?.id_Rooms) return false;
+    const clave = `mensajeHabitacion_${this.room.id_Rooms}`;
+    const mensaje = localStorage.getItem(clave);
+    return mensaje !== null && mensaje.trim().length > 0;
+  }
 
 
   getEstadoUppercase(estado: string): string {

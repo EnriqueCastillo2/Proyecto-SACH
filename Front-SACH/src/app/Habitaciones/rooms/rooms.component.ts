@@ -37,7 +37,10 @@ console.log(this.rooms);
   ) {}
 
   ngOnInit() {
-    this.cargarHabitaciones(); 
+
+    this.cargarHabitaciones();
+
+    this.roomsService.loadRooms() 
     this.isAdmin();
   }
 
@@ -61,15 +64,16 @@ console.log(this.rooms);
   }
 
   cargarHabitaciones() {
-    this.roomsService.getRooms().subscribe({
-      next: (rooms) => {
-        this.rooms = rooms;
-      },
-      error: (err: HttpErrorResponse) => {
-        this.customMessage =
-          err.error?.message || 'Error al cargar habitaciones';
-      },
-    });
+     this.roomsService.rooms$.subscribe({
+    next: (rooms) => {
+      this.rooms = rooms;
+      this.isLoading = false;
+    },
+    error: (err: HttpErrorResponse) => {
+      this.customMessage =
+        err.error?.message || 'Error al cargar habitaciones';
+    },
+  });
   }
 
   abrirFormularioRooms(room: Room | null) {

@@ -32,7 +32,10 @@ Header: string='HABITACIONES';
   
 
   logout(): void {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('rol');
+    localStorage.removeItem('idUser');
+
     this.router.navigate(['/']); 
   }
 }
