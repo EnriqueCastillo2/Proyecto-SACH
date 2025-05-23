@@ -1,0 +1,102 @@
+<div class="reporte-container">
+
+  <div class="header-section-grid">
+
+    
+    <div class="header-dia">
+      <span class="dia">{{ dia }}</span>
+    </div>
+
+  
+    <div class="header-logo">
+      <img src="LosMolinos.jpg" alt="los molinos" class="logo" />
+    </div>
+
+    
+    <div class="header-fecha">
+      <span class="Fecha-label">FECHA</span>
+
+      <mat-form-field appearance="fill" class="fecha-datepicker no-print">
+
+  <mat-label>Fecha</mat-label>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [(ngModel)]="Fecha"
+    (dateChange)="onFechaChange($event)"
+  />
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+ <span class="print-only fecha-impresa">
+    {{ Fecha | date: 'dd/MM/yyyy' }}
+  </span>
+    </div>
+
+  </div>
+
+  <div class="body-section">
+    <div class="body-section">
+
+  <h2>Primer Nivel</h2>
+  <table class="tabla-reporte">
+    <thead>
+      <tr>
+        <th>hab.</th>
+        <th>NOMBRE</th>
+        <th>TELEFONO</th>
+        <th>NO.PER</th>
+        <th>MONTO</th>
+        <th>ESTATUS</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let room of roomsNivel1">
+        <td  [ngStyle]="{ color: room.habitacion !== 'normal' ? 'red' : 'black'  }">{{ room.id_Rooms }}</td>
+        <td>{{    getHuespedPorHabitacion(room.id_Rooms)
+      ? getHuespedPorHabitacion(room.id_Rooms)!.nameHuesped + ' ' + getHuespedPorHabitacion(room.id_Rooms)!.apellidoHuesped
+      : '' }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.telefono  }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.numPersonas }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.monto }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.statusHuesped }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Segundo Nivel</h2>
+  <table class="tabla-reporte">
+    <thead>
+      <tr>
+        <th>hab.</th>
+        <th>NOMBRE</th>
+        <th>TELEFONO</th>
+        <th>NO.PER</th>
+        <th>MONTO</th>
+        <th>ESTATUS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of roomsNivel2">
+        <td [ngStyle]="{ color: room.habitacion !== 'normal' ? 'red' : 'black'  }">{{ room.id_Rooms }}</td>
+       <td>{{    getHuespedPorHabitacion(room.id_Rooms)
+      ? getHuespedPorHabitacion(room.id_Rooms)!.nameHuesped + ' ' + getHuespedPorHabitacion(room.id_Rooms)!.apellidoHuesped
+      : '' }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.telefono || '' }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.numPersonas }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.monto || '' }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.statusHuesped }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+   
+  </div>
+    <button class="btn-regresar" routerLink="/SACH/habitaciones" >← Regresar</button>
+    <button class="btn-imprimir no-print" (click)="imprimir()">Guardar PDF</button>
+
+</div>
+

@@ -10,6 +10,11 @@ export const routes: Routes = [
     pathMatch: 'full',
     
     },
+    {
+      path: 'GuardarReporte',
+      loadComponent: ()=> import('./reporte-diario/reporte-diario.component').then(c=>c.ReporteDiarioComponent),
+      pathMatch:'full'
+    },
 
     {
 

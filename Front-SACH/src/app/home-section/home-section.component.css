@@ -21,6 +21,7 @@
   background-color: white;
 }
 
+
 /* ========== LOGO Y TÍTULO ========== */
 .logo-overlay {
   display: flex;
@@ -48,7 +49,7 @@
   text-align: center;
   font-weight: 800;
   letter-spacing: 1px;
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  font-family: 'Helvetica Neue', 'Arial';
   display: inline-block;
 }
 

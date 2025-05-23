@@ -1,54 +1,57 @@
-  <div class="rooms-container">
-   
-    <!-- Navbar -->
-    <div class="navbar">
-     
-      <button>Imprimir Reporte</button>
-      <button routerLink="/SACH/huesped">Gestion de Huespedes</button>
-      @if (admin) { 
-        <button (click)="abrirFormularioRooms(null)">Nueva Habitacion</button>
-        <button routerLink="/SACH/users"> Control de Usuarios</button>
-      }
-      
+<div class="rooms-container">
+  <!-- Navbar -->
+  <div class="navbar">
+    <button routerLink="/GuardarReporte">Imprimir Reporte</button>
+    <button routerLink="/SACH/huesped">Gestion de Huespedes</button>
+    @if (admin) {
+    <button (click)="abrirFormularioRooms(null)">Nueva Habitacion</button>
+    <button routerLink="/SACH/users">Control de Usuarios</button>
+    }
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content">
+    <!-- Barra de búsqueda por ID -->
+    <div class="search-bar">
+      <!-- <input type="number" placeholder="Buscar por ID de habitación" [(ngModel)]="idBusqueda"/>
+          -->
+      <input
+        type="number"
+        maxlength="3"
+        placeholder="Buscar por ID de habitación"
+        [(ngModel)]="idBusqueda"
+        (input)="buscarHabitacionPorId()"
+      />
+      <!-- <button (click)="buscarHabitacionPorId()">Buscar</button> -->
     </div>
-  
-    <!-- Contenido principal -->
-    <div class="main-content">
-      <!-- Barra de búsqueda por ID -->
-      <div class="search-bar">
-        <input type="number" placeholder="Buscar por ID de habitación" [(ngModel)]="idBusqueda"/>
-        <button (click)="buscarHabitacionPorId()">Buscar</button>
-      </div>
-  
-   
 
-      <!-- Contenedor de habitaciones -->
-      <div class="roomContainer">
-        <div  class="grid-habitaciones" *ngIf="(rooms?.length ?? 0) > 0; else sinHabitaciones">
-
-          @for (room of rooms; track room.id_Rooms) {
-            <app-roomcard [room]="room" />
-          }
-        </div>
-
-         <ng-template #sinHabitaciones>
-          <p class="mensaje-vacio">{{customMessage}}</p>
-        </ng-template>
-        @if (isLoading) {
-          <div class="loader-container">
-            <mat-spinner diameter="50"></mat-spinner>
-            <p>Guardando Habitacion y cargando datos...</p>
-          </div>
-          }
-       
+    <!-- Contenedor de habitaciones -->
+    <div class="roomContainer">
+      <div
+        class="grid-habitaciones"
+        *ngIf="(rooms?.length ?? 0) > 0; else sinHabitaciones"
+      >
+        @for (room of rooms; track room.id_Rooms) {
+        <app-roomcard [room]="room" />
+        }
       </div>
-  
-      <!-- Botones de filtrado -->
-      <div class="filter-buttons">
-        <button (click)="cargarHabitaciones()">Todas las habitaciones</button>
-        <button (click)="filtrarPorNivel('N1')">Nivel 1</button>
-        <button (click)="filtrarPorNivel('N2')">Nivel 2</button>
+
+      <ng-template #sinHabitaciones>
+        <p class="mensaje-vacio">{{ customMessage }}</p>
+      </ng-template>
+      @if (isLoading) {
+      <div class="loader-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Guardando Habitacion y cargando datos...</p>
       </div>
+      }
+    </div>
+
+    <!-- Botones de filtrado -->
+    <div class="filter-buttons">
+      <button (click)="cargarHabitaciones()">Todas las habitaciones</button>
+      <button (click)="filtrarPorNivel('N1')">Nivel 1</button>
+      <button (click)="filtrarPorNivel('N2')">Nivel 2</button>
     </div>
   </div>
-  
+</div>

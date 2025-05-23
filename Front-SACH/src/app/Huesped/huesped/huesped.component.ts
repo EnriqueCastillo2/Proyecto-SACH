@@ -45,9 +45,12 @@ export class HuespedComponent implements OnInit {
 
     this.huespedService.loadHuespedes();
 
+
     
     this.huespedService.getHuespedes().subscribe(huespedes => {
-      this.huespedResponse = huespedes;
+      this.huespedResponse = huespedes.sort((a,b)=>{
+        return new Date(b.fechaRegistro).getTime()- new Date (a.fechaRegistro).getTime();
+      })
       this.aplicarFiltros(); 
     });
   }
@@ -93,7 +96,6 @@ export class HuespedComponent implements OnInit {
       this.snackBar.open('Huésped eliminado con éxito', 'Cerrar', {
         duration: 3000,
       });
-      // No hace falta volver a llamar a loadHuespedes porque ya lo hace el service
     });
   }
 }

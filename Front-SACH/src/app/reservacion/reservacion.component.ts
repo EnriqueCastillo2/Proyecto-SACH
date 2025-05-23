@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { RouterLink } from '@angular/router';
 import { UsersService } from '../Users/Users.service';
 import { User } from '../Users/user.model';
 import { FormRegistroComponent } from "./form-registro/form-registro.component";
@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-reservacion',
   imports: [FormRegistroComponent,CommonModule,
-    MatFormFieldModule,MatSelectModule,FormsModule
+    MatFormFieldModule,MatSelectModule,FormsModule,RouterLink
   ],
   templateUrl: './reservacion.component.html',
   styleUrl: './reservacion.component.css'
