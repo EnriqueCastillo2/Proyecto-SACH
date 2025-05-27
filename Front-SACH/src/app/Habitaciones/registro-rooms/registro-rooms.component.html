@@ -55,12 +55,15 @@
         <mat-label>Precio</mat-label>
         <input matInput formControlName="precio" type="number" />
       </mat-form-field>
+      <h3 *ngIf="roomForm.invalid && roomForm.touched"  style="margin: 0; padding: 0;color: red;">Todos los campos son obligatorios</h3>
     </div>
   </div>
-
+ 
   <!-- Campo Base64 oculto -->
   <div class="form-actions" mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit">Guardar</button>
     <button mat-button mat-dialog-close>Cancelar</button>
+
   </div>
+ 
 </form>

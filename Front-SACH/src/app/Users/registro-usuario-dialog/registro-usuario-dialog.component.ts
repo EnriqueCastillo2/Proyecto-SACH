@@ -36,7 +36,8 @@ import { User } from '../user.model';
 export class RegistroUsuarioDialogComponent implements OnInit {
   registroForm!: FormGroup;
   imagenPreview: string | null = null;
-  // timestamp: number = Date.now();
+  formInvalido=false;
+  errorPasswordBack:string='';
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +56,7 @@ export class RegistroUsuarioDialogComponent implements OnInit {
     this.registroForm = this.fb.group({
       name: [this.data?.name || '', Validators.required],
       apellido: [this.data?.apellido || '', Validators.required],
-      password: [ this.data?.password || '',  [Validators.required, Validators.minLength(6)],],
+      password: [ this.data?.password || '',  [Validators.required, Validators.minLength(8)],],
       typeUser: [this.data?.typeUser || '', Validators.required],
       imagenBase64: [this.data?.imagenBase64 || ''],
     });
@@ -92,6 +93,8 @@ export class RegistroUsuarioDialogComponent implements OnInit {
   }
 
   onSubmit() {
+    this.formInvalido=false;
+    this.errorPasswordBack='';
      
     if (this.registroForm.valid) {
       const usuario = this.registroForm.value;
@@ -109,11 +112,14 @@ export class RegistroUsuarioDialogComponent implements OnInit {
             this.dialogRef.close('actualizado');
               
           },
-          error: () => {
+          error: (error) => {
           
-            this.snackBar.open('Error al actualizar el usuario', 'Cerrar', {
-              duration: 3000,
-            });
+            const mensajeError = error.error?.message || '';
+          if (mensajeError.toLowerCase().includes('contraseña')) {
+            this.errorPasswordBack = mensajeError;
+          } else {
+            this.snackBar.open('Error al actualizar el usuario', 'Cerrar', { duration: 3000 });
+          }
           },
         });
       } else {
@@ -125,17 +131,19 @@ export class RegistroUsuarioDialogComponent implements OnInit {
             this.dialogRef.close('creado');
           },
           error: (error) => {
-            console.error('Error al registrar el usuario:', error);
-            this.snackBar.open('Error al registrar el usuario', 'Cerrar', {
-              duration: 3000,
-            });
-          },
-        });
-      }
-    } else {
-      this.snackBar.open('Por favor completa todos los campos', 'Cerrar', {
-        duration: 3000,
+             console.error('Error al registrar el usuario:', error);
+          const mensajeError = error.error?.message || '';
+          if (mensajeError.toLowerCase().includes('contraseña')) {
+            this.errorPasswordBack = mensajeError;
+          } else {
+            this.snackBar.open('Error al registrar el usuario', 'Cerrar', { duration: 3000 });
+          }
+        },
       });
+    }
+    } else {
+       this.formInvalido = true;
+    this.registroForm.markAllAsTouched();
     }
   }
 
@@ -144,6 +152,7 @@ export class RegistroUsuarioDialogComponent implements OnInit {
     this.imagenPreview = null;
     this.dialogRef.close();
   }
+  
   private generarPreviewImagen(imagen: string | null): string | null {
   if (!imagen) return null;
 

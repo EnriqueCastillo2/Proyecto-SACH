@@ -31,6 +31,11 @@
         accept="image/*"
         hidden
       />
+
+      <div *ngIf="formInvalido || errorPasswordBack" class="error-global">
+  <p *ngIf="formInvalido">Todos los campos son obligatorios.</p>
+  <p *ngIf="errorPasswordBack">{{ errorPasswordBack }}</p>
+</div>
     </div>
 
     <!-- Formulario a la derecha -->
@@ -69,4 +74,5 @@
     <button mat-raised-button color="primary" type="submit">Guardar</button>
     <button mat-button mat-dialog-close>Cancelar</button>
   </div>
+  
 </form>

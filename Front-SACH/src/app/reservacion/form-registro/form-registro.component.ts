@@ -78,10 +78,14 @@ export class FormRegistroComponent implements OnInit {
       idHuesped: [data?.idHuesped ],
       nameHuesped: [data?.nameHuesped || '', Validators.required],
       apellidoHuesped: [data?.apellidoHuesped || '', Validators.required],
-      telefono: [data?.telefono || '', Validators.required],
+      telefono: [data?.telefono || '',[Validators.required,Validators.pattern(/^\d{10}$/),
+    Validators.maxLength(8),] ],
       numPersonas: [data?.numPersonas ?? 1, [Validators.required, Validators.min(1)]],
-      monto: [data?.monto ?? 0, [Validators.required, Validators.min(0)]],
-      statusHuesped: [data?.statusHuesped || '', Validators.required],
+      monto: [data?.monto ??  [Validators.required, Validators.min(1)]],
+      statusHuesped: [data?.statusHuesped || 'Soltero(a)', [
+    Validators.required,
+    Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)
+  ]],
       fechaRegistro: [data?.fechaRegistro || null, Validators.required],
       fechaSalida: [data?.fechaSalida || null, Validators.required],
       usuarioRegistrador: this.fb.group({

@@ -54,7 +54,7 @@ public class UsersService {
     }
 
 
-    public Users updateUser(String id, Users user) {
+    public Users updateUser(String id, @Valid  Users user) {
         findUserById(id);
 
         user.setId_users(id);

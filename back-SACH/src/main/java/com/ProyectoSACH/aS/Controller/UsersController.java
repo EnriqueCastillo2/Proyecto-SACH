@@ -45,7 +45,7 @@ public class UsersController {
 
 
     @PutMapping("/{id}")
-    public Users updateUser(@PathVariable String id, @RequestBody Users user)
+    public Users updateUser(@Valid @PathVariable String id, @RequestBody Users user)
     {return  usersService.updateUser(id,user);}
 
 

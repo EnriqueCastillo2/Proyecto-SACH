@@ -92,6 +92,7 @@ export class RegistroRoomsComponent implements OnInit {
         });
       }
     } else {
+      this.roomForm.markAllAsTouched();
       this.snackBar.open('Por favor completa todos los campos', 'Cerrar', {
         duration: 3000,
       });

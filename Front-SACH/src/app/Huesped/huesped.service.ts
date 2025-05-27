@@ -31,11 +31,10 @@ clearHuespedAEditar() {
      this._http.get<HuespedResponse[]>(this.huespedUrl).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 404) {
-        // Si no hay huéspedes, simulamos una lista vacía
         this.huespedSubject.next([]);
-        return of([]); // Se devuelve un observable con lista vacía
+        return of([]); 
       }
-      return throwError(() => error); // Otros errores se lanzan normalmente
+      return throwError(() => error); 
     })
   ).subscribe((huespedes) => {
     const nuevos = huespedes.map(h => ({ ...h }));

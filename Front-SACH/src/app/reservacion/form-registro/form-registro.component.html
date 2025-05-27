@@ -12,7 +12,9 @@
 
   <mat-form-field>
     <mat-label>Telefono Huesped</mat-label>
-    <input matInput formControlName="telefono">
+    <input matInput formControlName="telefono" type="tel"  pattern="[0-9]*" 
+    placeholder="debe tener como minimo 8 digitos"
+    maxlength="16">
   </mat-form-field>
 
   <mat-form-field>
@@ -27,20 +29,21 @@
 
   <mat-form-field>
     <mat-label>Monto</mat-label>
-    <input matInput type="number" formControlName="monto">
+    <input matInput type="number" formControlName="monto"
+    placeholder="Coloque el monto total a cancelar por la habitación">
   </mat-form-field>
 
   <div formGroupName="usuarioRegistrador">
   <mat-form-field>
     <mat-label>Id Usuario</mat-label>
-    <input matInput formControlName="id_users">
+    <input matInput formControlName="id_users" readonly>
   </mat-form-field>
 </div>
 
 <div formGroupName="habitacionAsignada">
   <mat-form-field>
     <mat-label>Número de Habitación</mat-label>
-    <input matInput formControlName="id_Rooms">
+    <input matInput formControlName="id_Rooms" readonly>
   </mat-form-field>
 </div>
 

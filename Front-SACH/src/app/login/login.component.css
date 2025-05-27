@@ -268,3 +268,17 @@ img{
     max-width: 150px;
   }
 }
+
+.error-message {
+  margin-top: 10px;
+  color: #d32f2f;
+  background-color: #fbe9e7;
+  border: 1px solid #f44336;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

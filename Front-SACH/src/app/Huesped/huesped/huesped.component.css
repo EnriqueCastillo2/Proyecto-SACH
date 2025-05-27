@@ -12,6 +12,7 @@
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  
   margin-bottom: 2rem;
   flex-wrap: wrap;
   background: white;
@@ -147,7 +148,7 @@
 .habitacion-table td:nth-child(5) { width: 6%; }  /* No. Personas */
 
 .habitacion-table th:nth-child(6), 
-.habitacion-table td:nth-child(6) { width: 4%; }  /* Monto */
+.habitacion-table td:nth-child(6) { width: 5%; }  /* Monto */
 
 .habitacion-table th:nth-child(7), 
 .habitacion-table td:nth-child(7) { width: 5%; }  /* Estado */
@@ -278,9 +279,13 @@
     width: 100%;
     justify-content: center;
   }
-
+.habitacion-table th:nth-child(8), 
+.habitacion-table td:nth-child(8),
+.habitacion-table th:nth-child(9), 
+.habitacion-table td:nth-child(9) { width: 9%; } 
   .filtros-container {
     padding: 0.8rem;
+    margin-top: 3rem;
   }
 
   .tabla-container {

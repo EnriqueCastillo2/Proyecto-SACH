@@ -47,13 +47,13 @@
           matStartDate
           [(ngModel)]="filtroFechaInicio"
           (dateChange)="aplicarFiltros()"
-          placeholder="Fecha ingreso"
+          placeholder="MM/DD/YYYY llegada"
         />
         <input
           matEndDate
           [(ngModel)]="filtroFechaFin"
           (dateChange)="aplicarFiltros()"
-          placeholder="Fecha salida"
+          placeholder="MM/DD/YYYY salida"
         />
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -99,7 +99,7 @@
           <td>{{ h_Response.apellidoHuesped }}</td>
           <td>{{ h_Response.telefono }}</td>
           <td>{{ h_Response.numPersonas }}</td>
-          <td>{{ h_Response.monto }}</td>
+          <td>{{ h_Response.monto| currency : "Q" : "symbol" : "1.2-2" }}</td>
           <td>{{ h_Response.statusHuesped }}</td>
           <td>{{ h_Response.fechaRegistro | date : "dd/MM/yyyy" }}</td>
           <td>{{ h_Response.fechaSalida | date : "dd/MM/yyyy" }}</td>

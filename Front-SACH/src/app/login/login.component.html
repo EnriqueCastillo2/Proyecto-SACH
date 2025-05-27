@@ -1,57 +1,61 @@
 <!-- login.component.html -->
 <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
 <div class="login-wrapper">
-    <div class="container">
-      <!-- Sección izquierda -->
-      <div class="info">
-        <p class="txt-1">¡BIENVENIDO!</p>
-        <h2>SACH</h2>
-        <hr>
-        <p class="txt-2">
-          SISTEMA DE ADMINISTRACIÓN Y CONTROL DE HABITACIONES
-        </p>
-        <img src="Losmolinos.png" alt="Logo Hotel Los Molinos">
-      </div>
-  
-      <!-- Sección derecha: Formulario -->
-      <form class="form" (ngSubmit)="onSubmit()">
-        <h2>INICIAR SESIÓN</h2>
-        <p>
-          "Hagas lo que hagas, hazlo bien, tan bien que, cuando la gente te vea quiera traer a otros para mostrarles."
-        </p>
-        <div class="inputs">
+  <div class="container">
+    <!-- Sección izquierda -->
+    <div class="info">
+      <p class="txt-1">¡BIENVENIDO!</p>
+      <h2>SACH</h2>
+      <hr />
+      <p class="txt-2">SISTEMA DE ADMINISTRACIÓN Y CONTROL DE HABITACIONES</p>
+      <img src="Losmolinos.png" alt="Logo Hotel Los Molinos" />
+    </div>
+
+    <!-- Sección derecha: Formulario -->
+    <form class="form" (ngSubmit)="onSubmit()">
+      <h2>INICIAR SESIÓN</h2>
+      <p>
+        "Hagas lo que hagas, hazlo bien, tan bien que, cuando la gente te vea
+        quiera traer a otros para mostrarles."
+      </p>
+      <div class="inputs">
+        <input
+          type="text"
+          class="box"
+          placeholder="Ingrese Nombre de Usuario "
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+       
+
+        <div class="password-container">
           <input
-            type="text"
+            [type]="showPassword ? 'text' : 'password'"
             class="box"
-            placeholder="Ingrese Nombre de Usuario "
-            [(ngModel)]="username"
-            name="username"
+            id="password"
+            placeholder="Ingrese Contraseña"
+            [(ngModel)]="password"
+            name="password"
             required
           />
-  
-          <div class="password-container">
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              class="box"
-              id="password"
-              placeholder="Ingrese Contraseña"
-              [(ngModel)]="password"
-              name="password"
-              required
-            />
-            <i
-              class="fa eye-icon"
-              [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"
-              (click)="togglePassword()"
-            ></i>
-          </div>
-  
-          <input type="submit" value="Ingresar" class="submit" />
+          <i
+            class="fa eye-icon"
+            [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"
+            (click)="togglePassword()"
+          ></i>
         </div>
-      </form>
-    </div>
+        
+
+        <input type="submit" value="Ingresar" class="submit" />
+      </div>
+      <div *ngIf="loginErrorMessage" class="error-message">
+  <i class="fa fa-exclamation-circle"></i>
+  {{ loginErrorMessage }}
+</div>
+    </form>
   </div>
-  
+</div>
