@@ -6,12 +6,7 @@
     
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+
 
 /* Contenedor principal centrado */
 .container {
@@ -19,12 +14,13 @@ body {
     display: flex;
     flex-direction: row;
     max-width: 1000px;
-    width: 95%;
+    width: 50%;
     height: auto;
     box-shadow: 0px 0px 40px  #06022c;
     border-radius: 10px;
     overflow: hidden;
 }
+
 .login-wrapper {
     display: flex;
     justify-content: center;
@@ -212,4 +208,63 @@ img{
         height: 100px;
         
     }
+}
+
+@media (max-width: 400px) {
+  .container {
+    flex-direction: column-reverse; /* <-- Esto invierte el orden */
+    width: 95%;
+    border-width: 4px;
+    box-shadow: 0px 0px 20px #06022c;
+  }
+
+  .info, .form {
+    width: 100%;
+    padding: 20px 15px;
+    text-align: center;
+  }
+
+  .info h2 {
+    font-size: 26px;
+  }
+
+  .txt-1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .txt-2 {
+    font-size: 14px;
+  }
+
+  .info hr {
+    width: 30px;
+    border-width: 2px;
+    margin-bottom: 10px;
+  }
+
+  .form h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .form p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .box {
+    font-size: 14px;
+    padding: 12px 10px;
+  }
+
+  .submit {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  img {
+    width: 50%;
+    max-width: 150px;
+  }
 }

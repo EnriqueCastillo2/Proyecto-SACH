@@ -32,8 +32,8 @@
 }
 
 .logo {
-  width: clamp(80px, 15vw, 125px);
-  height: clamp(80px, 15vw, 125px);
+  width: clamp(80px, 15vw, 100px);
+  height: clamp(80px, 15vw, 100px);
   border-radius: 50%;
   object-fit: cover;
   border: 5px solid #0a1f3a;
@@ -45,7 +45,7 @@
   margin: 0;
   padding: 0;
   position: relative;
-  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-size: clamp(1.8rem, 6vw, 2.7rem);
   text-align: center;
   font-weight: 800;
   letter-spacing: 1px;
@@ -81,11 +81,11 @@
 .home-button { margin-right: 20%; }
 
 .logout-label,.home-label {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   background-color: #05244e;
   color: #ffffff;
-  padding: 12px 30px;
+  padding: 10px 20px;
   border-radius: 30px;
   transition: all 0.3s ease;
   border: 2px solid transparent;
@@ -109,8 +109,7 @@
 
 /* ========== BODY ========== */
 .body-section {
-  padding: 1rem 2rem 2rem;
-  margin-top: 0;
+  padding: 1rem 1rem 1rem;
 }
 
 /* ========== MEDIA QUERIES ========== */
@@ -203,8 +202,13 @@
     padding: 4px 8px;
   }
   
-  .home-button, 
+ .home-button,
   .logout-button {
-    padding: 0 2px;
+    padding: 0;
+    width: 10%;
+    justify-content: center;
   }
+ 
+
+  
 }

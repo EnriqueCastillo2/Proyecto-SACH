@@ -25,7 +25,7 @@ export const routes: Routes = [
       {
         path: 'users',
         loadComponent: () => import('./Users/usersList/usersList.component').then(c => c.UserHistoryComponent),
-        data: { requiredRole: 'admin',title:'Gestion de Usuarios' }
+        data: { requiredRole: 'admin',title:'Gestion de Usuarios' }//
       },
       {
         path: 'habitaciones',

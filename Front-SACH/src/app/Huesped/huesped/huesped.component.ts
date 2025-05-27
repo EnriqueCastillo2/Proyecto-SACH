@@ -11,6 +11,7 @@ import { HuespedService } from '../huesped.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-huesped',
@@ -26,8 +27,8 @@ import { Router } from '@angular/router';
   templateUrl: './huesped.component.html',
   styleUrls: ['./huesped.component.css']
 })
-export class HuespedComponent implements OnInit {
-
+export class HuespedComponent implements OnInit  {
+  
   huespedResponse: HuespedResponse[] = [];
   huespedResponseFiltrados: HuespedResponse[] = [];
   filtroId: string = '';
@@ -44,16 +45,22 @@ export class HuespedComponent implements OnInit {
   ngOnInit() {
 
     this.huespedService.loadHuespedes();
-
+this.suscribirseAHuespedes();
 
     
-    this.huespedService.getHuespedes().subscribe(huespedes => {
-      this.huespedResponse = huespedes.sort((a,b)=>{
-        return new Date(b.fechaRegistro).getTime()- new Date (a.fechaRegistro).getTime();
-      })
-      this.aplicarFiltros(); 
-    });
+    
   }
+
+  private suscribirseAHuespedes(){
+    this.huespedService.getHuespedes().subscribe(huespedes => {
+    // Asegura nueva referencia para cambio por Angular
+    this.huespedResponse = [...huespedes].sort((a, b) =>
+      new Date(b.fechaRegistro).getTime() - new Date(a.fechaRegistro).getTime()
+    );
+    this.aplicarFiltros(); 
+  });
+  }
+  
 
   esIdValido(): boolean {
     return this.filtroId?.length === 3 && /^\d+$/.test(this.filtroId);
@@ -77,6 +84,7 @@ export class HuespedComponent implements OnInit {
 
       return coincideHabitacion && coincideFecha;
     });
+
   }
 
   limpiarFiltros() {
@@ -92,10 +100,20 @@ export class HuespedComponent implements OnInit {
 }
 
   delete(id: string) {
-    this.huespedService.deleteHuesped(id).subscribe(() => {
+      this.huespedService.deleteHuesped(id).subscribe({
+    next: () => {
       this.snackBar.open('Huésped eliminado con éxito', 'Cerrar', {
         duration: 3000,
       });
-    });
+      // No llamar a aplicarFiltros aquí
+      // Deja que la suscripción a getHuespedes() reaccione
+    },
+    error: (err) => {
+      console.error('Error al eliminar huésped:', err);
+      this.snackBar.open('Error al eliminar huésped', 'Cerrar', {
+        duration: 3000,
+      });
+    },
+  });
   }
 }

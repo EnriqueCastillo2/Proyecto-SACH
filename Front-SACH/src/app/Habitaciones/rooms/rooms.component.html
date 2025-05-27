@@ -13,8 +13,7 @@
   <div class="main-content">
     <!-- Barra de búsqueda por ID -->
     <div class="search-bar">
-      <!-- <input type="number" placeholder="Buscar por ID de habitación" [(ngModel)]="idBusqueda"/>
-          -->
+
       <input
         type="number"
         maxlength="3"
@@ -22,7 +21,7 @@
         [(ngModel)]="idBusqueda"
         (input)="buscarHabitacionPorId()"
       />
-      <!-- <button (click)="buscarHabitacionPorId()">Buscar</button> -->
+     
     </div>
 
     <!-- Contenedor de habitaciones -->
@@ -39,12 +38,7 @@
       <ng-template #sinHabitaciones>
         <p class="mensaje-vacio">{{ customMessage }}</p>
       </ng-template>
-      @if (isLoading) {
-      <div class="loader-container">
-        <mat-spinner diameter="50"></mat-spinner>
-        <p>Guardando Habitacion y cargando datos...</p>
-      </div>
-      }
+     
     </div>
 
     <!-- Botones de filtrado -->

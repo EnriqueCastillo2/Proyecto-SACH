@@ -59,13 +59,16 @@
 
 /* ---- Tabla ---- */
 .tabla-container {
+  width: 100%;
   overflow-x: auto;
+  overflow-y: auto;
+  display: block;
   box-shadow: 0 6px 30px rgba(10, 31, 58, 0.15);
   border-radius: 8px;
   background: white;
   border: 1px solid #e0e0e0;
   max-height: 600px; 
-  overflow-y: auto;
+  
 }
 
 .habitacion-table {
@@ -76,7 +79,7 @@
   border-radius: 10px;
   overflow: hidden;
   table-layout: fixed;
-  min-width :1200px; ; /* Para columnas uniformes */
+  min-width :1200px;  /* Para columnas uniformes */
 }
 
 /* Cabecera */
@@ -130,7 +133,7 @@
 
 /* Anchos de columnas específicos */
 .habitacion-table th:nth-child(1), 
-.habitacion-table td:nth-child(1) { width: 4%; }  /* Habitación */
+.habitacion-table td:nth-child(1) { width: 3%; }  /* Habitación */
 
 .habitacion-table th:nth-child(2), 
 .habitacion-table td:nth-child(2),
@@ -215,3 +218,113 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1200px) {
+  .habitacion-table {
+    min-width: 1000px;
+  }
+
+  .tabla-container {
+    overflow-x: auto;
+  }
+
+  .filtros-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filtro-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .habitacion-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .filtros-container {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .habitacion-table th,
+  .habitacion-table td {
+    font-size: 18px;
+    padding: 0.8rem 0.5rem;
+  }
+
+  .btn-editar,
+  .btn-eliminar {
+    font-size: 13px;
+    padding: 0.5rem 1rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .habitacion-table th,
+  .habitacion-table td {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .btn-editar,
+  .btn-eliminar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filtros-container {
+    padding: 0.8rem;
+  }
+
+  .tabla-container {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 1700px) and (min-width: 769px) {
+  .habitacion-table {
+    table-layout: auto !important; /* Deja que las columnas se adapten */
+    min-width: unset !important;   /* Permite que se reduzca si cabe */
+  }
+
+  .habitacion-table th,
+  .habitacion-table td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    padding: 0.8rem 0.6rem;
+  }
+
+  .tabla-container {
+    overflow-x: auto;
+  }
+
+  .habitacion-table th:not(:last-child)::after {
+    display: none; /* Evita solapes de líneas verticales decorativas */
+  }}
+
+  @media (max-width: 1700px) and (min-width: 1100px) {
+  .btn-group {
+    gap: 0.4rem;
+  }
+
+  .btn-editar,
+  .btn-eliminar {
+    padding: 0.4rem 0.8rem;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+
+  .habitacion-table th:nth-child(11),
+  .habitacion-table td:nth-child(11) {
+    width: 8%; /* antes era 12%, ahora más compacto */
+  }
+}

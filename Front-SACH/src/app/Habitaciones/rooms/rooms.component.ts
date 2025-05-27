@@ -99,24 +99,6 @@ console.log(this.rooms);
   }
 
   buscarHabitacionPorId() {
-    // if (this.idBusqueda == null) {
-    //   this.snackBar.open('Por favor ingresa un ID para buscar.', 'Cerrar', { duration: 3000 });
-    //   return;
-    // }
-  
-    // this.isLoading = true;
-    // this.roomsService.getRoomById(this.idBusqueda).subscribe({
-    //   next: (room) => {
-    //     this.rooms = [room]; // Mostramos solo esa habitación encontrada
-    //     this.isLoading = false;
-    //     this.customMessage = '';
-    //   },
-    //   error: (err: HttpErrorResponse) => {
-    //     this.rooms = [];
-    //     this.isLoading = false;
-    //     this.customMessage = err.error?.message || 'Habitación no encontrada';
-    //   },
-    // });
 
      if (this.idBusqueda === null || this.idBusqueda.toString().length === 0) {
     this.cargarHabitaciones(); // Mostrar todas

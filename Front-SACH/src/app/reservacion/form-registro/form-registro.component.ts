@@ -52,9 +52,14 @@ export class FormRegistroComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
      this.idRoomFromRoute = Number(this.route.snapshot.paramMap.get('id'));
+   
     this.initForm();
+
     this.setUserIdFromLocalStorage();
+
+
      this.huespedService.huespedAEditar$.pipe(take(1)).subscribe(huesped => {
     if (huesped) {
       this.initForm(huesped);
@@ -62,6 +67,8 @@ export class FormRegistroComponent implements OnInit {
       this.autollenarSiHuespedActivo();
      
     }
+
+    
   });
 
   }
@@ -95,15 +102,20 @@ export class FormRegistroComponent implements OnInit {
   }
 
  private autollenarSiHuespedActivo() {
+  
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
 
     this.huespedService.getHuespedes().subscribe((huespedes) => {
+      
       const huespedActivo = huespedes.find(h => {
+
         const inicio = new Date(h.fechaRegistro);
         const fin = new Date(h.fechaSalida);
         inicio.setHours(0, 0, 0, 0);
         fin.setHours(0, 0, 0, 0);
+       
+
         return (
           hoy >= inicio &&
           hoy <= fin &&

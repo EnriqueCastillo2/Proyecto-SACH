@@ -1,13 +1,9 @@
 <div
   class="tarjeta-habitacion"
   [ngClass]="[getClaseEstado(room.estado), getTipoHabitacion(room.habitacion)]"
-> 
-
-
- @if (admin) {
-   <div class="acciones-habitacion">
-   
-    
+>
+  @if (admin) {
+  <div class="acciones-habitacion">
     <button class="btn-icono editar" (click)="editarHabitacion()">
       <i class="material-icons">edit</i>
     </button>
@@ -17,9 +13,9 @@
     >
       <i class="material-icons">delete</i>
     </button>
-  
   </div>
   }
+
   <a
     [routerLink]="['/SACH/RegistroHuesped', room.id_Rooms]"
     style="text-decoration: none; color: inherit"
@@ -28,24 +24,26 @@
       <span
         class="imagen-habitacion"
         [ngClass]="getTipoHabitacion(room.habitacion)"
-        >{{ room.id_Rooms }}</span>
+        >{{ room.id_Rooms }}</span
+      >
 
-       <div class="contenedor-estado-y-icono">
-          <span class="badge-estado" [ngClass]="getClaseEstado(room.estado)">
-        {{ getEstadoUppercase(room.estado) }}    
-      </span>
+      <div class="contenedor-estado-y-icono">
+        <span class="badge-estado" [ngClass]="getClaseEstado(room.estado)">
+          {{ getEstadoUppercase(room.estado) }}
+        </span>
 
-      <mat-icon style="background-color: white; border-radius: 20%;"
-      *ngIf="tieneMensaje()"
-      matBadge="!"
-      matBadgeColor="warn"
-      matBadgePosition="above after"
-      class="icono-mensaje"
-      aria-label="Mensaje disponible" >
-      message
-    </mat-icon>
-
-       </div>
+        <mat-icon
+          style="background-color: white; border-radius: 20%"
+          *ngIf="tieneMensaje()"
+          matBadge="!"
+          matBadgeColor="warn"
+          matBadgePosition="above after"
+          class="icono-mensaje"
+          aria-label="Mensaje disponible"
+        >
+          message
+        </mat-icon>
+      </div>
     </div>
 
     <div class="detalles-habitacion">

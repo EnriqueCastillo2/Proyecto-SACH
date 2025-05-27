@@ -59,7 +59,7 @@
       : '' }}</td>
     <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.telefono  }}</td>
     <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.numPersonas }}</td>
-    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.monto }}</td>
+    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.monto| currency:'Q':'symbol':'1.2-2' }}</td>
     <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.statusHuesped }}</td>
       </tr>
     </tbody>
@@ -85,7 +85,7 @@
       : '' }}</td>
     <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.telefono || '' }}</td>
     <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.numPersonas }}</td>
-    <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.monto || '' }}</td>
+    <td>{{getHuespedPorHabitacion(room.id_Rooms)?.monto | currency:'GTQ':'symbol':'1.2-2' }}</td>
     <td>{{ getHuespedPorHabitacion(room.id_Rooms)?.statusHuesped }}</td>
       </tr>
     </tbody>

@@ -40,14 +40,13 @@
 /* Contenedor de imagen */
 .contenedor-imagen {
   position: relative;
-  height: 220px;
+  height: 190px;
   overflow: hidden;
-
 }
 
 .imagen-habitacion {
   font-family: "Bodoni MT Black", "Playfair Display", serif;
-  font-size: 150px;
+  font-size: 120px;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -122,19 +121,16 @@
 }
 
 .nivel-habitacion {
-  font-size: 1.4rem;
+  font-size:1rem;
   color: goldenrod;
- background-color: #002a5b;
-  padding: 0.3rem 0.6rem;
+  background-color: #002a5b;
+  padding: 0.3rem 0.4rem;
   border-radius: 50%;
  
 }
 
 .info-habitacion p {
   margin: 0.5rem 0;
-  /* color: gold; */
-
- 
 }
 
 .info-habitacion strong {
@@ -142,16 +138,14 @@
 }
 
 
-
 .acciones-habitacion {
- 
+
   position: absolute;
   top: 12px;
   right: 12px;
   display: flex;
   gap: 8px;
   opacity: 0;
-  /* transition: opacity 0.3s ease; */
   z-index: 3;
 }
 
@@ -170,17 +164,14 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
-  /* transition: background 0.3s; */
+ 
 }
 
 .btn-icono:hover {
   background: #f0f0f0;
 }
 
-.btn-icono i {
-  font-size: 18px;
-  color: #333;
-}
+
 
 .btn-icono.editar i {
   color: #2196f3;
@@ -197,7 +188,7 @@
   display: flex;
   flex-direction: row;  
   align-items: center;
-  gap: 8px; /* Espacio entre estado e ícono */
+  gap: 8px; 
   z-index: 3;
 }
 

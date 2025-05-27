@@ -2,10 +2,10 @@
 .RegistroHuesped-container {
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
   font-size: 1.1rem;
-  background-color: #f4f6fa;
-  min-height: 81vh;
+  
+  min-height: 50vh;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 0.8rem;
 }
 
 /* Contenedor que divide el formulario en dos columnas */
@@ -20,12 +20,12 @@
 /* Área del huésped (izquierda) */
 .huesped-area {
   flex: 1;
-  background-color: #0a1f3a; /* Azul marino */
+  background-color: #0a1f3a; 
   color: white;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-   min-height: 75vh;
+   min-height: 10vh;
 }
 
 /* Columna derecha que contiene usuario y habitación */
@@ -38,11 +38,11 @@
 
 /* Área del usuario y de la habitación */
 .user-area, .habitacion-area {
-  flex: 1;
+  flex: 0 1 auto;
 background-color: #fef6e4; /* Dorado pálido */
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #0a1f3a;
-  padding: 1rem;
+  padding: 0.6rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
@@ -104,7 +104,7 @@ img {
 /* Área de texto para pendientes */
 textarea#pendientes {
   width: 100%;
-  height: 290px;
+  height: 150px;
   max-height: 300px;
   font-size: 1rem;
   padding: 0.75rem;
@@ -120,7 +120,7 @@ select {
   padding: 10px;
   border-radius: 8px;
   font-size: 1rem;
-  width: 40%;
+  width: 50%;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;

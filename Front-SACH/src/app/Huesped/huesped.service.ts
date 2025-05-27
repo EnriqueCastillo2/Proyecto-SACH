@@ -1,9 +1,7 @@
-
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HuespedRequest, HuespedResponse } from './huesped.model';
- // Ajusta la ruta según tu estructura
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +27,26 @@ clearHuespedAEditar() {
 
  
   loadHuespedes() {
-    this._http.get<HuespedResponse[]>(this.huespedUrl).subscribe((huespedes) => {
-      const nuevos = huespedes.map(h => ({ ...h }));
-      this.huespedSubject.next(nuevos);
-    });
+  
+     this._http.get<HuespedResponse[]>(this.huespedUrl).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 404) {
+        // Si no hay huéspedes, simulamos una lista vacía
+        this.huespedSubject.next([]);
+        return of([]); // Se devuelve un observable con lista vacía
+      }
+      return throwError(() => error); // Otros errores se lanzan normalmente
+    })
+  ).subscribe((huespedes) => {
+    const nuevos = huespedes.map(h => ({ ...h }));
+    this.huespedSubject.next(nuevos);
+  });
   }
 
   getHuespedes(): Observable<HuespedResponse[]> {
+     if (this.huespedSubject.value.length === 0) {
+    this.loadHuespedes(); // Solo carga si está vacío
+  }
     return this.huesped$;
   }
 
