@@ -50,7 +50,19 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200","http://192.168.1.4:4200"));
+        
+//        configuration.setAllowedOrigins(List.of("http://localhost:4200","http://192.168.1.4:4200",
+//                  "http://localhost",         // <--- agrega esto
+//    "http://localhost:80"   ));
+        
+//        configuration.setAllowedOriginPatterns(List.of(
+//        "http://localhost",
+//           "http://localhost:80" ,
+//           "http://localhost:4200",
+//        "http://192.168.1.*"
+//    ));
+        
+configuration.setAllowedOriginPatterns(List.of("*"));
 
         // Frontend origin
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE","PATCH" ,"OPTIONS"));

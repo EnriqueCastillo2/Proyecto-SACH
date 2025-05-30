@@ -16,7 +16,9 @@ import { HuespedResponse } from '../../Huesped/huesped.model';
 import { RoomsService } from '../../Habitaciones/rooms.service';
 import { TypesRoomsStatus } from '../../Habitaciones/rooms.model';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @Component({
@@ -29,7 +31,7 @@ import { take } from 'rxjs';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CommonModule,
+    CommonModule,MatSelectModule,MatOptionModule
   ],
   templateUrl: './form-registro.component.html',
   styleUrl: './form-registro.component.css',
@@ -40,6 +42,7 @@ export class FormRegistroComponent implements OnInit {
   formulario!: FormGroup;
   idRoomFromRoute!: number;
   readonly idUsuarioRegistrador = output<string>();
+  readonly estadosHuesped = ['pendiente de pago', 'cancelado'];
 
 
   constructor(
@@ -78,13 +81,13 @@ export class FormRegistroComponent implements OnInit {
       idHuesped: [data?.idHuesped ],
       nameHuesped: [data?.nameHuesped || '', Validators.required],
       apellidoHuesped: [data?.apellidoHuesped || '', Validators.required],
-      telefono: [data?.telefono || '',[Validators.required,Validators.pattern(/^\d{10}$/),
-    Validators.maxLength(8),] ],
+      telefono: [data?.telefono || '',[Validators.required,Validators.pattern(/^\d{8,15}$/),
+    Validators.maxLength(15),] ],
       numPersonas: [data?.numPersonas ?? 1, [Validators.required, Validators.min(1)]],
       monto: [data?.monto ??  [Validators.required, Validators.min(1)]],
-      statusHuesped: [data?.statusHuesped || 'Soltero(a)', [
+      statusHuesped: [data?.statusHuesped || '', [
     Validators.required,
-    Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)
+    Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s()]+$/)
   ]],
       fechaRegistro: [data?.fechaRegistro || null, Validators.required],
       fechaSalida: [data?.fechaSalida || null, Validators.required],
@@ -141,57 +144,148 @@ export class FormRegistroComponent implements OnInit {
   cancelar() {
     this.formulario.reset();
      this.huespedService.clearHuespedAEditar();
-     
+    
   }
   
 
 
+
+// onSubmit() {
+//   if (this.formulario.valid) {
+//     const huespedRequest = this.formulario.value;
+//     const idHuesped = this.formulario.get('idHuesped')?.value;
+
+//     const fechaRegistro = new Date(huespedRequest.fechaRegistro);
+//     const hoy = new Date();
+//     fechaRegistro.setHours(0, 0, 0, 0);
+//     hoy.setHours(0, 0, 0, 0);
+
+
+//     const cambiarEstadoSiEsHoy = () => {
+//       if (fechaRegistro.getTime() === hoy.getTime()) {
+//         this.habitacionService.changeStatus(
+//           huespedRequest.habitacionAsignada.id_Rooms,
+//           TypesRoomsStatus.ocupada
+//         ).subscribe({
+          
+//           error: () => confirm('Error al actualizar habitación:')
+//         });
+//       }
+//     };
+
+//     const onSuccess = (msg: string) => {
+//       confirm(msg);
+//       cambiarEstadoSiEsHoy();
+//       this.formulario.reset();
+//       this.huespedService.clearHuespedAEditar();
+//     };
+
+//     if (idHuesped) {
+//       this.huespedService.updateHuesped(idHuesped, huespedRequest).subscribe({
+//         next: () => onSuccess('Huésped actualizado con éxito'),
+//         error: (err) => console.error('Error al actualizar huésped:', err)
+//       });
+//     } else {
+//       this.huespedService.createHuesped(huespedRequest).subscribe({
+//         next: () => onSuccess('Huésped registrado con éxito'),
+//         error: () => confirm('Error al registrar el huésped')
+//       });
+//     }
+//   } else {
+//     this.formulario.markAllAsTouched();
+//   }
+// }
 
 onSubmit() {
   if (this.formulario.valid) {
     const huespedRequest = this.formulario.value;
     const idHuesped = this.formulario.get('idHuesped')?.value;
 
-    const fechaRegistro = new Date(huespedRequest.fechaRegistro);
-    const hoy = new Date();
-    fechaRegistro.setHours(0, 0, 0, 0);
-    hoy.setHours(0, 0, 0, 0);
+    const fechaInicio = new Date(huespedRequest.fechaRegistro);
+    const fechaFin = new Date(huespedRequest.fechaSalida);
+    fechaInicio.setHours(0, 0, 0, 0);
+    fechaFin.setHours(0, 0, 0, 0);
 
+    const esNuevo = !idHuesped;
 
-    const cambiarEstadoSiEsHoy = () => {
-      if (fechaRegistro.getTime() === hoy.getTime()) {
-        this.habitacionService.changeStatus(
-          huespedRequest.habitacionAsignada.id_Rooms,
-          TypesRoomsStatus.ocupada
-        ).subscribe({
-          
-          error: () => confirm('Error al actualizar habitación:')
+    this.verificarTraslapeDeFechas(fechaInicio, fechaFin).pipe(take(1)).subscribe(hayTraslape => {
+      if (esNuevo && hayTraslape) {
+        confirm('Ya existe una reservación que se cruza con estas fechas en esta habitación.');
+        return;
+      }
+
+      const cambiarEstadoSiEsHoy = () => {
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+        if (fechaInicio.getTime() === hoy.getTime()) {
+          this.habitacionService.changeStatus(
+            huespedRequest.habitacionAsignada.id_Rooms,
+            TypesRoomsStatus.ocupada
+          ).subscribe({
+            error: () => confirm('Error al actualizar habitación:')
+          });
+        }
+      };
+
+      const onSuccess = (msg: string) => {
+        confirm(msg);
+        cambiarEstadoSiEsHoy();
+        this.formulario.reset();
+        this.huespedService.clearHuespedAEditar();
+      };
+
+      if (idHuesped) {
+        this.huespedService.updateHuesped(idHuesped, huespedRequest).subscribe({
+          next: () => onSuccess('Huésped actualizado con éxito'),
+          error: (err) => console.error('Error al actualizar huésped:', err)
+        });
+      } else {
+        this.huespedService.createHuesped(huespedRequest).subscribe({
+          next: () => onSuccess('Huésped registrado con éxito'),
+          error: () => confirm('Error al registrar el huésped')
         });
       }
-    };
-
-    const onSuccess = (msg: string) => {
-      confirm(msg);
-      cambiarEstadoSiEsHoy();
-      this.formulario.reset();
-      this.huespedService.clearHuespedAEditar();
-    };
-
-    if (idHuesped) {
-      this.huespedService.updateHuesped(idHuesped, huespedRequest).subscribe({
-        next: () => onSuccess('Huésped actualizado con éxito'),
-        error: (err) => console.error('Error al actualizar huésped:', err)
-      });
-    } else {
-      this.huespedService.createHuesped(huespedRequest).subscribe({
-        next: () => onSuccess('Huésped registrado con éxito'),
-        error: () => confirm('Error al registrar el huésped')
-      });
-    }
+    });
   } else {
     this.formulario.markAllAsTouched();
   }
 }
+
+nuevaReservacion() {
+  this.huespedService.clearHuespedAEditar(); // Por si venía de una edición
+  this.initForm(); // Reinciamos el formulario sin datos
+  this.setUserIdFromLocalStorage(); // Reasignamos los campos autocompletables
+}
+
+
+private verificarTraslapeDeFechas(fechaInicio: Date, fechaFin: Date): Observable<boolean> {
+  const idHuespedActual = this.formulario.get('idHuesped')?.value;
+
+  return this.huespedService.getHuespedes().pipe(
+    map(huespedes => {
+      return huespedes.some(h => {
+        if (h.idHuesped === idHuespedActual) {
+          return false; // Ignora la misma reservación si estamos editando
+        }
+
+        const inicio = new Date(h.fechaRegistro);
+        const fin = new Date(h.fechaSalida);
+        const mismaHabitacion = h.habitacionAsignada?.id_Rooms === this.idRoomFromRoute;
+
+        inicio.setHours(0, 0, 0, 0);
+        fin.setHours(0, 0, 0, 0);
+
+        // Permitir registro si la fecha de ingreso es igual a la salida de otro huésped
+        return (
+          mismaHabitacion &&
+          (fechaInicio < fin && fechaFin > inicio)
+        );
+      });
+    })
+  );
+}
+
+
 
 }
 

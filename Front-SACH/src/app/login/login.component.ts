@@ -40,7 +40,7 @@ export class LoginComponent {
 
        if (err.status === 0) {
           // No hay conexión con el servidor
-          this.loginErrorMessage = 'No se pudo conectar con el servidor.  ';
+          this.loginErrorMessage = 'No se logro establecer conexión con el servidor.  ';
         } else {
           // Error de autenticación u otro
           this.loginErrorMessage = 'Credenciales incorrectas o usuario no encontrado. Valide que su nombre y contraseña sean correctos.';

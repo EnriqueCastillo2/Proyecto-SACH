@@ -3,12 +3,9 @@ package com.ProyectoSACH.aS.Service;
 import com.ProyectoSACH.aS.GlobalExceptionHandler.ResourceNotFoundException;
 import com.ProyectoSACH.aS.Model.Huespedes;
 import com.ProyectoSACH.aS.Repository.HuespedRepository;
-import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

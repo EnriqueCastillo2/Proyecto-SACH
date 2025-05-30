@@ -21,6 +21,17 @@ form {
     grid-column: span 2;
   }
   
+  .form-buttons {
+  grid-column: span 2;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.form-buttons button {
+  flex: 1; /* Todos los botones ocupan el mismo espacio */
+}
+
   @media (max-width: 768px) {
     form {
       grid-template-columns: 1fr;
@@ -31,4 +42,8 @@ form {
       grid-column: span 1 !important;
     }
   }
-  
+  @media (max-width: 768px) {
+  .form-buttons {
+    flex-direction: column;
+  }
+}
