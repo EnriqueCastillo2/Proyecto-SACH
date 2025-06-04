@@ -51,4 +51,6 @@ Para ejecutar la aplicación correctamente en un equipo local se recomienda cont
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tuusuario/sach-backend.git
+   (https://github.com/EnriqueCastillo2/Proyecto-SACH.git)
+   ```
+   
