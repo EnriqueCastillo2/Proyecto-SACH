@@ -1,4 +1,4 @@
-# 🏨 SACH - Sistema de Administración de Clientes y Habitaciones
+# 🏨 SACH - Sistema de Administración y Control de Habitaciones
 
 **SACH** es una aplicación web desarrollada con Angular 19 y Spring Boot 2.2.4 (Java 20), diseñada para facilitar la gestión de habitaciones, huéspedes (reservaciones) y usuarios en entornos hoteleros o similares. Ofrece una interfaz gráfica moderna y amigable, junto con funcionalidades de impresión de reportes.
 
@@ -8,7 +8,7 @@
 - 🧑‍🤝‍🧑 CRUD de Huéspedes y sus Reservaciones
 - 👤 CRUD de Usuarios del sistema
 - 🖨️ Impresión de reportes diarios
-- 🌈 Interfaz visual atractiva con Angular Material
+   Interfaz visual atractiva con Angular Material
 
 ---
 
