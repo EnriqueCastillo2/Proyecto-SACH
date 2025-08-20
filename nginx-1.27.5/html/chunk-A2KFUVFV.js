@@ -1,0 +1,1 @@
+var i=(e=>(e.normal="normal",e.doble="doble",e.plus="plus",e))(i||{}),a=(r=>(r.N1="N1",r.N2="N2",r))(a||{}),l=(e=>(e.ocupada="ocupada",e.libre="libre",e.limpieza="limpieza",e))(l||{});export{i as a,a as b,l as c};

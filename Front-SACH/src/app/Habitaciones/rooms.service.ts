@@ -6,6 +6,7 @@ import { Room, TypesRoomsStatus } from './rooms.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class RoomsService {
   private roomsSubject= new BehaviorSubject<Room[]>([]);
   rooms$=this.roomsSubject.asObservable();

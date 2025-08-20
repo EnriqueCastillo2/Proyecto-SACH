@@ -9,8 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Asegúrate de que la ruta esté bien escrita con "file:///" y que termine en /
+        // Asegúrate de que la ruta esté bien escrita con "file:///" ys que termine en /
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:///C:/Users/flavi/Videos/SACH/uploads/");
+//        registry.addResourceHandler("/uploads/**")
+//                .addResourceLocations("file:///C:/Users/RECEPCIÓN/Documents/SACH/uploads/");
     }
 }
